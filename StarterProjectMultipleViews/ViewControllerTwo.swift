@@ -27,11 +27,15 @@
 
 import UIKit
 
-class ViewControllerTwo: UIViewController {
+class ViewControllerTwo: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     // MARK: - IBOutlets
     
-    
+    @IBOutlet weak var categoryLabel: UILabel!
+    @IBOutlet weak var dateLabel: UILabel!
+    @IBOutlet weak var ageLabel: UILabel!
+    @IBOutlet weak var descLabel: UILabel!
+    @IBOutlet weak var eventImage: UIImageView!
     
     // MARK: - Variables and Constants
     
@@ -39,9 +43,24 @@ class ViewControllerTwo: UIViewController {
     
     // MARK: - IBActions and Functions
     
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return Data.eventsList.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        let tableViewCell = tableView.dequeueReusableCell(withIdentifier: "HomepageVCCell") as! TableViewCell
+        let currentEvent = Data.eventsList[indexPath.row]
+        tableViewCell.categoryLabel.text = currentEvent.eventName
+        tableViewCell.eventDesc.text = currentEvent.eventDesc
+        tableViewCell.eventImage.image = currentEvent.eventImage
+        
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+
     }
 
 
