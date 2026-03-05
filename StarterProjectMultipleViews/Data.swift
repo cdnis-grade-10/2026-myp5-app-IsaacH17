@@ -48,7 +48,7 @@ class Data {
     
     // Creating the full event struct with all required parameters
     
-    struct Events {
+    struct Event {
         var eventName: String
         var eventAgeRange: Data.ageRange
         var category: Data.category
@@ -68,9 +68,9 @@ class Data {
     // Array of events
     
     static var eventsList = [
-        Events(eventName: "Teaching Math to Children", eventAgeRange: .age13Up, category: .education, eventDate: DateComponents(year: 2026, month: 3, day: 26), eventStartTime: DateComponents(hour: 15, minute: 00), eventEndTime: DateComponents(hour: 18, minute: 00), latLocation: 22.24, longLocation: 114.17, descTag1: "Fun", descTag2: "Lively", descTag3: "Engaging", eventDesc: "Come teach math to primary school students!", eventImage: UIImage(named: "TeachingMath")!),
-        Events(eventName: "Hong Kong Breadrun", eventAgeRange: .age16Up, category: .others, eventDate: DateComponents(year: 2026, month: 3, day: 29), eventStartTime: DateComponents(hour: 08, minute: 00), eventEndTime: DateComponents(hour: 09, minute: 30), latLocation: 22.33, longLocation: 114.16, descTag1: "Enriching", descTag2: "Inspiring", descTag3: "", eventDesc: "Come breadrun with other volunteers!", eventImage: UIImage(named: "HongKongBreadrun")!),
-        Events(eventName: "Play Sports with Children", eventAgeRange: .age16to18, category: .sports, eventDate: DateComponents(year: 2026, month: 4, day: 10), eventStartTime: DateComponents(hour: 17, minute: 00), eventEndTime: DateComponents(hour: 19, minute: 00), latLocation: 22.28, longLocation: 114.18, descTag1: "Active", descTag2: "Refreshing", descTag3: "", eventDesc: "Come play sports with undepriviledged children!", eventImage: UIImage(named: "PlaySports")!)
+        Event(eventName: "Teaching Math to Children", eventAgeRange: .age13Up, category: .education, eventDate: DateComponents(year: 2026, month: 3, day: 26), eventStartTime: DateComponents(hour: 15, minute: 00), eventEndTime: DateComponents(hour: 18, minute: 00), latLocation: 22.24, longLocation: 114.17, descTag1: "Fun", descTag2: "Lively", descTag3: "Engaging", eventDesc: "Come teach math to primary school students!", eventImage: UIImage(named: "TeachingMath")!),
+        Event(eventName: "Hong Kong Breadrun", eventAgeRange: .age16Up, category: .others, eventDate: DateComponents(year: 2026, month: 3, day: 29), eventStartTime: DateComponents(hour: 08, minute: 00), eventEndTime: DateComponents(hour: 09, minute: 30), latLocation: 22.33, longLocation: 114.16, descTag1: "Enriching", descTag2: "Inspiring", descTag3: "", eventDesc: "Come breadrun with other volunteers!", eventImage: UIImage(named: "HongKongBreadrun")!),
+        Event(eventName: "Play Sports with Children", eventAgeRange: .age16to18, category: .sports, eventDate: DateComponents(year: 2026, month: 4, day: 10), eventStartTime: DateComponents(hour: 17, minute: 00), eventEndTime: DateComponents(hour: 19, minute: 00), latLocation: 22.28, longLocation: 114.18, descTag1: "Active", descTag2: "Refreshing", descTag3: "", eventDesc: "Come play sports with undepriviledged children!", eventImage: UIImage(named: "PlaySports")!)
     ]
     
 }

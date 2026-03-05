@@ -27,32 +27,101 @@
 
 import UIKit
 
-class ViewControllerTwo: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class ViewControllerTwo: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchResultsUpdating, UISearchBarDelegate {
     
     // MARK: - IBOutlets
 
     @IBOutlet weak var usernameLabel: UILabel!
-    @IBOutlet weak var eventTableView: TableViewCell!
+    @IBOutlet weak var eventTableView: UITableView!
     
     // MARK: - Variables and Constants
     
-    
+    let searchController = UISearchController()
+    var filteredList = Data.eventsList
     
     // MARK: - IBActions and Functions
     
+    // Telling the # of rows in the table view (determined based on the # of Event struct entries in the eventsList array)
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return Data.eventsList.count
+        
+        if searchController.isActive {
+            return filteredList.count
+        } else {
+            return Data.eventsList.count
+        }
+        
     }
+    
+    // Inputting the actual content for each row of the table view (assigning the different labels etc. to different values of the Event struct)
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let tableViewCell = tableView.dequeueReusableCell(withIdentifier: "homepageVCCell") as! TableViewCell
-        let currentEvent = Data.eventsList[indexPath.row]
+        
+        let currentEvent: Data.Event
+        
+        if searchController.isActive {
+            currentEvent = filteredList[indexPath.row]
+        } else {
+            currentEvent = Data.eventsList[indexPath.row]
+        }
+        
         tableViewCell.eventName.text = currentEvent.eventName
-        tableViewCell.eventDesc.text = currentEvent.eventDesc
-        tableViewCell.eventImage.image = currentEvent.eventImage
+        tableViewCell.eventDesc.text = "\(currentEvent.descTag1), \(currentEvent.descTag2), \(currentEvent.descTag3)"
         
         return tableViewCell
+        
+    }
+    
+    func initSearchController() {
+        
+        // Quality of life to enhance the user's experience when using the search bar and filter buttons
+        
+        searchController.loadViewIfNeeded()
+        searchController.searchResultsUpdater = self
+        searchController.obscuresBackgroundDuringPresentation = false
+        searchController.searchBar.enablesReturnKeyAutomatically = false
+        searchController.searchBar.returnKeyType = UIReturnKeyType.done
+        definesPresentationContext = true
+        
+        navigationItem.searchController = searchController
+        navigationItem.hidesSearchBarWhenScrolling = false
+        searchController.searchBar.scopeButtonTitles = ["All", "Education", "Sports", "Arts", "Others", "13-16", "16-18", "13+", "16+"]
+        searchController.searchBar.delegate = self
+    }
+    
+    func updateSearchResults(for searchController: UISearchController) {
+        let searchBar = searchController.searchBar
+        let filterButton = searchBar.scopeButtonTitles![searchBar.selectedScopeButtonIndex]
+        let searchText = searchBar.text!
+        
+        fullFilter(searchText: searchText, scopeButton: filterButton)
+    }
+    
+    func fullFilter(searchText: String, scopeButton: String = "All") {
+        
+        filteredList = Data.eventsList.filter {
+            
+            // NEED TO FIX LOGIC
+            
+            event in
+            let scopeMatch = (scopeButton == "All" || event.eventName.lowercased().contains(scopeButton.lowercased()))
+            
+            //let scopeMatch = (scopeButton == "All" || event.category == scopeButton || event.eventAgeRange == scopeButton)
+            
+            if searchController.searchBar.text != "" {
+                let searchTextMatch = (event.eventName.lowercased().contains(searchText.lowercased()) || event.eventDesc.lowercased().contains(searchText.lowercased()))
+                
+                return scopeMatch && searchTextMatch
+                
+            } else {
+                return scopeMatch
+            }
+            
+        }
+        
+        eventTableView.reloadData()
         
     }
     
@@ -61,6 +130,8 @@ class ViewControllerTwo: UIViewController, UITableViewDataSource, UITableViewDel
         // Do any additional setup after loading the view.
         
         usernameLabel.text = "Name: " + Data.username
+        
+        initSearchController()
     }
 
 
