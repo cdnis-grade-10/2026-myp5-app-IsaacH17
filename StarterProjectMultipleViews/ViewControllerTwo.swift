@@ -30,12 +30,9 @@ import UIKit
 class ViewControllerTwo: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     // MARK: - IBOutlets
-    
-    @IBOutlet weak var categoryLabel: UILabel!
-    @IBOutlet weak var dateLabel: UILabel!
-    @IBOutlet weak var ageLabel: UILabel!
-    @IBOutlet weak var descLabel: UILabel!
-    @IBOutlet weak var eventImage: UIImageView!
+
+    @IBOutlet weak var usernameLabel: UILabel!
+    @IBOutlet weak var eventTableView: TableViewCell!
     
     // MARK: - Variables and Constants
     
@@ -49,18 +46,21 @@ class ViewControllerTwo: UIViewController, UITableViewDataSource, UITableViewDel
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let tableViewCell = tableView.dequeueReusableCell(withIdentifier: "HomepageVCCell") as! TableViewCell
+        let tableViewCell = tableView.dequeueReusableCell(withIdentifier: "homepageVCCell") as! TableViewCell
         let currentEvent = Data.eventsList[indexPath.row]
-        tableViewCell.categoryLabel.text = currentEvent.eventName
+        tableViewCell.eventName.text = currentEvent.eventName
         tableViewCell.eventDesc.text = currentEvent.eventDesc
         tableViewCell.eventImage.image = currentEvent.eventImage
+        
+        return tableViewCell
         
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-
+        
+        usernameLabel.text = "Name: " + Data.username
     }
 
 

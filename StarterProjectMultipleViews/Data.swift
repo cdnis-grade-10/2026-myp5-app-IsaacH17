@@ -74,3 +74,11 @@ class Data {
     ]
     
 }
+
+class TableViewCell: UITableViewCell {
+    @IBOutlet weak var eventName: UILabel!
+    @IBOutlet weak var eventDate: UILabel!
+    @IBOutlet weak var eventAge: UILabel!
+    @IBOutlet weak var eventDesc: UILabel!
+    @IBOutlet weak var eventImage: UIImageView!
+}

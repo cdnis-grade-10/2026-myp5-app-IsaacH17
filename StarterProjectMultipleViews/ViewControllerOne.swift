@@ -33,6 +33,7 @@ class ViewControllerOne: UIViewController {
     
     @IBOutlet weak var userTextField: UITextField!
     @IBOutlet weak var errorMessage: UILabel!
+    @IBOutlet weak var userSelection: UILabel!
     
     // MARK: - Variables and Constants
     
@@ -54,10 +55,13 @@ class ViewControllerOne: UIViewController {
         switch sender.tag {
         case 1:
             Data.userInterest = "Education"
+            userSelection.text = "Your Selection: Education"
         case 2:
             Data.userInterest = "Sports"
+            userSelection.text = "Your Selection: Sports"
         case 3:
             Data.userInterest = "Arts"
+            userSelection.text = "Your Selection: Arts"
         default:
             return
         }
