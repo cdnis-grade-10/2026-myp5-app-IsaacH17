@@ -66,6 +66,8 @@ class ViewControllerOne: UIViewController {
                 Data.userInterest = Data.categoryString(category: Data.category.sports)
             case 3:
                 Data.userInterest = Data.categoryString(category: Data.category.arts)
+            case 4:
+                Data.userInterest = Data.categoryString(category: Data.category.others)
             default:
                 return
             }

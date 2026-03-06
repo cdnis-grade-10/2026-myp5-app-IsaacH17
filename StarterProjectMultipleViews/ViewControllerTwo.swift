@@ -32,6 +32,7 @@ class ViewControllerTwo: UIViewController, UITableViewDataSource, UITableViewDel
     // MARK: - IBOutlets
 
     @IBOutlet weak var usernameLabel: UILabel!
+    @IBOutlet weak var chosenFilter: UILabel!
     @IBOutlet weak var eventTableView: UITableView!
     
     // MARK: - Variables and Constants
@@ -111,9 +112,18 @@ class ViewControllerTwo: UIViewController, UITableViewDataSource, UITableViewDel
         navigationItem.searchController = searchController
         navigationItem.hidesSearchBarWhenScrolling = false
         
-        // Creating the filters that will be available for selection
+        // Moving the search controller from the bottom to the top
         
-        searchController.searchBar.scopeButtonTitles = ["All", "Education", "Sports", "Arts", "Others", "13-16", "16-18", "13+", "16+"]
+        if #available(iOS 26.0, *) {
+            navigationItem.searchBarPlacementAllowsToolbarIntegration = false
+        } else {
+            // Fallback on earlier versions
+        }
+        
+        
+        // Creating the filters that will be available for selection (emojis have to be used due to space constraints) - there will be a label indicating the user's filter selection to compensate
+        
+        searchController.searchBar.scopeButtonTitles = ["All", "📚", "⚽️", "🎭", "Misc", "13+", "16+"]
         searchController.searchBar.delegate = self
     }
     
@@ -145,9 +155,68 @@ class ViewControllerTwo: UIViewController, UITableViewDataSource, UITableViewDel
              - If the event name contains the category itself
              - If the filter (age range) matches the age range of the event
              Returns true or false
+             
+             When a filter is selected, the label will tell the user what filter they have chosen (especially because emojis may be difficult to understand)
              */
             
-            let scopeMatch = (scopeButton == Data.categoryString(category: event.category) || scopeButton == Data.ageRangeString(ageRange: event.eventAgeRange) || event.eventName.lowercased().contains(scopeButton.lowercased()))
+            /*
+             Looking at the age filters (by default, it is determined that the age range filter doesn't match the event's age range unless proven)
+             - If 13+ is selected, then see if the event's age is either 13+ or 13-16, return true if so
+             - If 16+ is selected, then see if the event's age is either 16+ or 16-18, return true if so
+             */
+            
+            var ageRangeTrue = false
+            
+            if scopeButton == "13+" {
+                chosenFilter.text = "Filter Selection: 13+"
+                if Data.ageRangeString(ageRange: event.eventAgeRange) == "13+" || Data.ageRangeString(ageRange: event.eventAgeRange) == "13-16" {
+                    ageRangeTrue = true
+                }
+            } else if scopeButton == "16+" {
+                chosenFilter.text = "Filter Selection: 16+"
+                if Data.ageRangeString(ageRange: event.eventAgeRange) == "16+" || Data.ageRangeString(ageRange: event.eventAgeRange) == "16-18" {
+                    ageRangeTrue = true
+                }
+            }
+            
+            /*
+             Looking at the category filters
+             - Checking if the selected filters match the event's category - if so then filter category = event category criteria is met
+             */
+            
+            var correctFilterCategory = false
+                        
+            switch scopeButton {
+            case "All":
+                correctFilterCategory = true
+                chosenFilter.text = "Filter Selection: All"
+            case "📚":
+                chosenFilter.text = "Filter Selection: Education"
+                if Data.categoryString(category: event.category) == "Education" {
+                    correctFilterCategory = true
+                }
+            case "⚽️":
+                chosenFilter.text = "Filter Selection: Sports"
+                if Data.categoryString(category: event.category) == "Sports" {
+                    correctFilterCategory = true
+                }
+            case "🎭":
+                chosenFilter.text = "Filter Selection: Arts"
+                if Data.categoryString(category: event.category) == "Arts" {
+                    correctFilterCategory = true
+                }
+            case "Misc":
+                chosenFilter.text = "Filter Selection: Misc"
+                if Data.categoryString(category: event.category) == "Others" {
+                    correctFilterCategory = true
+                }
+            default:
+                break
+            }
+            
+            // Seeing if any of the 3 criteria have been met
+            
+            let scopeMatch = (correctFilterCategory == true || ageRangeTrue == true || event.eventName.lowercased().contains(scopeButton.lowercased()))
             
             /*
              Check if the user inputted a search keyword
@@ -166,12 +235,7 @@ class ViewControllerTwo: UIViewController, UITableViewDataSource, UITableViewDel
                 return scopeMatch
             }
             
-        }
-        
-        // Showing all the events if the filter is 'all'
-        
-        if scopeButton == "All" {
-            filteredList = Data.eventsList
+            
         }
         
         // Reloading table view data
