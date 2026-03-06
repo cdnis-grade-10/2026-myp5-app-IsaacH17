@@ -38,7 +38,6 @@ class ViewControllerOne: UIViewController {
     // MARK: - Variables and Constants
     
     var selectedInterest = false
-    //var userCategory: Data.category
     
     // MARK: - IBActions and Functions
     
@@ -52,20 +51,28 @@ class ViewControllerOne: UIViewController {
         
         // Assigning the category as a text to a variable if the user has selected a button
         
-        switch sender.tag {
-        case 1:
-            Data.userInterest = "Education"
-            userSelection.text = "Your Selection: Education"
-        case 2:
-            Data.userInterest = "Sports"
-            userSelection.text = "Your Selection: Sports"
-        case 3:
-            Data.userInterest = "Arts"
-            userSelection.text = "Your Selection: Arts"
-        default:
-            return
-        }
+        /*
+         If the user has selected a button:
+         - Use the button's tag to determine the category the user selected and assign it to the userInterest variable (this will be used later to automatically filter the homepage screen according to the category
+         - Using a label to tell the user what button they selected (for confirmation) using enums
+         */
         
+        if selectedInterest == true {
+            
+            switch sender.tag {
+            case 1:
+                Data.userInterest = Data.categoryString(category: Data.category.education)
+            case 2:
+                Data.userInterest = Data.categoryString(category: Data.category.sports)
+            case 3:
+                Data.userInterest = Data.categoryString(category: Data.category.arts)
+            default:
+                return
+            }
+            
+            userSelection.text = "Your Selection: \(Data.userInterest)"
+            
+        }
     }
     
     @IBAction func submitButton(_ sender: UIButton) {
@@ -74,7 +81,7 @@ class ViewControllerOne: UIViewController {
         
         if userTextField.text != "" && selectedInterest == true {
             
-            // Assigning the username to a variable & moving to the next screen
+            // Assigning the username to a global variable & moving to the next screen
             
             Data.username = userTextField.text!
             performSegue(withIdentifier: "segueToSecondVC", sender: self)

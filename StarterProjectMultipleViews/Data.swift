@@ -31,22 +31,38 @@ class Data {
         case age16to18
     }
     
-//    // Reformatting the enum input into an actual string
-//    
-//    static func categoryString(category: category) {
-//        switch category {
-//        case .education:
-//            userInterest = "Education"
-//        case .sports:
-//            userInterest = "Sports"
-//        case .arts:
-//            userInterest = "Others"
-//        case .others:
-//            return
-//        }
-//    }
+    /*
+     Reformatting the enum inputs into actual strings
+     Using the enum input as an argument and returning the string instead of assigning a variable to the string allows for flexibility (func. can be reused across different screens)
+     */
+
+    static func categoryString(category: category) -> String {
+        switch category {
+        case .education:
+            return "Education"
+        case .sports:
+            return "Sports"
+        case .arts:
+            return "Arts"
+        case .others:
+            return "Others"
+        }
+    }
     
-    // Creating the full event struct with all required parameters
+    static func ageRangeString(ageRange: ageRange) -> String {
+        switch ageRange {
+        case .age13Up:
+            return "13+"
+        case .age13to16:
+            return "13-16"
+        case .age16Up:
+            return "16+"
+        case .age16to18:
+            return "16-18"
+        }
+    }
+    
+    // Creating the full event struct and assigning each variable to the relevant data type
     
     struct Event {
         var eventName: String
@@ -65,7 +81,7 @@ class Data {
         var isFavorited = false
     }
     
-    // Array of events
+    // Creating an array of the Events struct (all of the app's events will be stored in here)
     
     static var eventsList = [
         Event(eventName: "Teaching Math to Children", eventAgeRange: .age13Up, category: .education, eventDate: DateComponents(year: 2026, month: 3, day: 26), eventStartTime: DateComponents(hour: 15, minute: 00), eventEndTime: DateComponents(hour: 18, minute: 00), latLocation: 22.24, longLocation: 114.17, descTag1: "Fun", descTag2: "Lively", descTag3: "Engaging", eventDesc: "Come teach math to primary school students!", eventImage: UIImage(named: "TeachingMath")!),
@@ -73,7 +89,37 @@ class Data {
         Event(eventName: "Play Sports with Children", eventAgeRange: .age16to18, category: .sports, eventDate: DateComponents(year: 2026, month: 4, day: 10), eventStartTime: DateComponents(hour: 17, minute: 00), eventEndTime: DateComponents(hour: 19, minute: 00), latLocation: 22.28, longLocation: 114.18, descTag1: "Active", descTag2: "Refreshing", descTag3: "", eventDesc: "Come play sports with undepriviledged children!", eventImage: UIImage(named: "PlaySports")!)
     ]
     
+    // Creating a function to parse the DateComponents from the Events struct into an actual, readable string format
+    // Users must give the 3 different DateComponents from the Events struct to be able to extract the actual date of the event + start & end time of the event
+    
+    static func parseDateComponent(date: DateComponents, startTime: DateComponents, endTime: DateComponents) -> String {
+        
+        // Assigning variables which convert each of the DateComponents into a Date type format
+        
+        let date = Calendar.current.date(from: date)
+        let startTime = Calendar.current.date(from: startTime)
+        let endTime = Calendar.current.date(from: endTime)
+        
+        // Assigning a date format (telling how we want the actual string that shows the date to look like after we convert it from the Date format --> String format)
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "MMM d"
+        let timeFormatter = DateFormatter()
+        timeFormatter.dateFormat = "HH:mm"
+        
+        // Using the date format to convert the Dates --> Strings then returning it as one whole string
+        
+        let actualDate = dateFormatter.string(from: date!)
+        let actualStart = timeFormatter.string(from: startTime!)
+        let actualEnd = timeFormatter.string(from: endTime!)
+        
+        return "\(actualDate), \(actualStart) - \(actualEnd)"
+        
+    }
+    
 }
+
+// A class that stores all of the outlets which are present in each table view cell
 
 class TableViewCell: UITableViewCell {
     @IBOutlet weak var eventName: UILabel!
