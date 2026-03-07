@@ -54,6 +54,10 @@ class ViewControllerThree: UIViewController, UIPickerViewDelegate, UIPickerViewD
     let ageOptions = ["13+", "16+", "13-16", "16-18"]
     let categoryOptions = ["Education", "Sports", "Arts", "Others"]
     
+    let datePicker = UIDatePicker()
+    let startTimePicker = UIDatePicker()
+    let endTimePicker = UIDatePicker()
+    
     // MARK: - IBActions and Functions
     
     @IBAction func imagePickerButton(_ sender: UIButton) {
@@ -103,6 +107,28 @@ class ViewControllerThree: UIViewController, UIPickerViewDelegate, UIPickerViewD
             categoryField.text = categoryOptions[row]
         }
     }
+    
+    @objc func datePickerValueChanged(sender: UIDatePicker) {
+        
+        let dateFormatter = DateFormatter()
+        let timeFormatter = DateFormatter()
+        dateFormatter.dateFormat = "dd/MM/yyyy"
+        timeFormatter.dateFormat = "HH:mm"
+        
+        switch sender {
+        case datePicker:
+            dateField.text = dateFormatter.string(from: sender.date)
+        case startTimePicker:
+            startTimeField.text = timeFormatter.string(from: sender.date)
+        case endTimePicker:
+            endTimeField.text = timeFormatter.string(from: sender.date)
+        default:
+            break
+        }
+        // when date picker is changed, this function will be run
+        
+        
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -116,5 +142,23 @@ class ViewControllerThree: UIViewController, UIPickerViewDelegate, UIPickerViewD
         
         categoryField.inputView = categoryPickerView
         categoryPickerView.delegate = self
+        
+        //date logic
+        
+        datePicker.minimumDate = Date()
+        
+        datePicker.datePickerMode = .date
+        startTimePicker.datePickerMode = .time
+        endTimePicker.datePickerMode = .time
+        
+        dateField.inputView = datePicker
+        startTimeField.inputView = startTimePicker
+        endTimeField.inputView = endTimePicker
+        
+        for picker in [datePicker, startTimePicker, endTimePicker] {
+            picker.addTarget(self, action: #selector(datePickerValueChanged(sender:)), for: UIControl.Event.valueChanged)
+            picker.preferredDatePickerStyle = .wheels
+        }
+        
     }
 }
