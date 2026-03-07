@@ -214,6 +214,13 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Recommended" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zop-If-VeM">
+                                                    <rect key="frame" x="225" y="37" width="116" height="21"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                         </tableViewCellContentView>
                                         <connections>
@@ -222,6 +229,7 @@
                                             <outlet property="eventDesc" destination="uSQ-3Q-Yd5" id="cFA-1h-xVh"/>
                                             <outlet property="eventImage" destination="Z57-jk-RQM" id="K6e-lc-6ST"/>
                                             <outlet property="eventName" destination="0uF-oD-LF8" id="Dgl-Z9-aWK"/>
+                                            <outlet property="recommendLabel" destination="Zop-If-VeM" id="5xx-0g-c4k"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>

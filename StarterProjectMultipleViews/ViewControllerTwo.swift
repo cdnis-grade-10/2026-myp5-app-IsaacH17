@@ -53,13 +53,9 @@ class ViewControllerTwo: UIViewController, UITableViewDataSource, UITableViewDel
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        //***CHECK***
+        // Returning the filtered list of events --> updateSearchResults is called once this screen is loaded in so the filteredList will show the new list based on the filter (the user's selected user interest)
         
-        if searchController.isActive {
-            return filteredList.count
-        } else {
-            return Data.eventsList.count
-        }
+        return filteredList.count
         
     }
     
@@ -72,17 +68,11 @@ class ViewControllerTwo: UIViewController, UITableViewDataSource, UITableViewDel
         let tableViewCell = tableView.dequeueReusableCell(withIdentifier: "homepageVCCell") as! TableViewCell
         
         /*
-         Getting the event from the array (filtered or full list depending on if the search controller is active)
-         This just gets the event details for one event and will be repeated for all events in the array
+         Getting the event from the filtered event list array
+         This gets the event details for one event and then is repeated for all events in the array
          */
         
-        let currentEvent: Data.Event
-        
-        if searchController.isActive {
-            currentEvent = filteredList[indexPath.row]
-        } else {
-            currentEvent = Data.eventsList[indexPath.row]
-        }
+        let currentEvent = filteredList[indexPath.row]
         
         // Populating the table cell with event details based on the current event
         
@@ -91,6 +81,16 @@ class ViewControllerTwo: UIViewController, UITableViewDataSource, UITableViewDel
         tableViewCell.eventAge.text = "Age: " + Data.ageRangeString(ageRange: currentEvent.eventAgeRange)
         tableViewCell.eventDesc.text = "\(currentEvent.descTag1), \(currentEvent.descTag2), \(currentEvent.descTag3)"
         tableViewCell.eventImage.image = currentEvent.eventImage
+        
+        // If the event aligns with the user's chosen user interest, then there will be a recommended tag applied to the event
+        
+        print(Data.categoryString(category: currentEvent.category), Data.userInterest)
+        
+        if Data.categoryString(category: currentEvent.category) != Data.userInterest {
+            tableViewCell.recommendLabel.isHidden = true
+        } else {
+            tableViewCell.recommendLabel.isHidden = false
+        }
         
         return tableViewCell
         
@@ -108,6 +108,7 @@ class ViewControllerTwo: UIViewController, UITableViewDataSource, UITableViewDel
         searchController.searchBar.enablesReturnKeyAutomatically = false
         searchController.searchBar.returnKeyType = UIReturnKeyType.done
         definesPresentationContext = true
+        searchController.scopeBarActivation = .onSearchActivation
         
         navigationItem.searchController = searchController
         navigationItem.hidesSearchBarWhenScrolling = false
@@ -130,16 +131,44 @@ class ViewControllerTwo: UIViewController, UITableViewDataSource, UITableViewDel
     // Updating the actual results by getting the search bar keyword and filter selected, then displaying the new list of events using the fullFilter function
     
     func updateSearchResults(for searchController: UISearchController) {
+        
+        // Retrieving the search keyword from the search bar and the selected filter button
+        
         let searchBar = searchController.searchBar
-        let filterButton = searchBar.scopeButtonTitles![searchBar.selectedScopeButtonIndex]
         let searchText = searchBar.text!
+        var filterButton = searchBar.scopeButtonTitles![searchBar.selectedScopeButtonIndex]
+        
+        /*
+         If the search controller is inactive (essentially when no filters have been applied at all which usually happens when the homepage screen is first loaded in):
+         The filter will be the user's selected interest (so that the events list is filtered based on the user's interest preference)
+         */
+        
+        if searchController.isActive == false {
+            
+            switch Data.userInterest {
+            case "Education":
+                filterButton = searchBar.scopeButtonTitles![1]
+            case "Sports":
+                filterButton = searchBar.scopeButtonTitles![2]
+            case "Arts":
+                filterButton = searchBar.scopeButtonTitles![3]
+            case "Others":
+                filterButton = searchBar.scopeButtonTitles![4]
+            default:
+                break
+            }
+            
+        }
+        
+        // Filtering the events list
         
         fullFilter(searchText: searchText, scopeButton: filterButton)
+        
     }
     
     // Function that determines how the events list is filtered, scope button is set to the user's interest category selected from the signup screen by default
     
-    func fullFilter(searchText: String, scopeButton: String = Data.userInterest) {
+    func fullFilter(searchText: String, scopeButton: String) {
         
         // Creating the filtered list by filtering the full events list
         
@@ -253,9 +282,10 @@ class ViewControllerTwo: UIViewController, UITableViewDataSource, UITableViewDel
         usernameLabel.text = "Name: " + Data.username
         initSearchController()
         
-        // Add code to filter the events list based on the user's interest
+        // Updating the homepage screen events list to filter the events based on the user's selected interest when the user loads into the screen for the 1st time
+        
+        updateSearchResults(for: self.searchController)
         
     }
-
 
 }
