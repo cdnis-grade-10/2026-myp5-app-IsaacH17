@@ -70,6 +70,11 @@ class ViewControllerThree: UIViewController, UIPickerViewDelegate, UIPickerViewD
         
     }
     
+    @IBAction func submitButton(_ sender: UIBarButtonItem) {
+        let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "mainVCNav")
+        self.present(vc, animated: true, completion: nil)
+    }
+    
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         guard let image = info[.editedImage] as? UIImage else {
             return

@@ -86,7 +86,10 @@ class ViewControllerOne: UIViewController {
             // Assigning the username to a global variable & moving to the next screen
             
             Data.username = userTextField.text!
-            performSegue(withIdentifier: "segueToSecondVC", sender: self)
+            
+            let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "mainVCNav")
+            self.present(vc, animated: true, completion: nil)
+            
         } else {
             
             // Showing the error message if inputs haven't been fully completed
