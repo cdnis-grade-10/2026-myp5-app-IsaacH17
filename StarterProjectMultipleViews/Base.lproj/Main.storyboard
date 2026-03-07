@@ -426,7 +426,7 @@
                         <color key="backgroundColor" systemColor="systemYellowColor"/>
                     </view>
                     <navigationItem key="navigationItem" id="nDl-kt-SjV">
-                        <barButtonItem key="rightBarButtonItem" title="Item" id="Sx6-XZ-RzH">
+                        <barButtonItem key="rightBarButtonItem" title="Submit" id="Sx6-XZ-RzH">
                             <connections>
                                 <action selector="submitButton:" destination="Pf6-Zn-bo0" id="ZUC-M2-xpJ"/>
                             </connections>

@@ -71,8 +71,101 @@ class ViewControllerThree: UIViewController, UIPickerViewDelegate, UIPickerViewD
     }
     
     @IBAction func submitButton(_ sender: UIBarButtonItem) {
-        let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "mainVCNav")
-        self.present(vc, animated: true, completion: nil)
+        
+        /*
+         Checking if the latitude and longitude value are a Double and if their values are within a certain range
+         */
+        
+        let isLatDouble = Double(latField.text!)
+        let isLongDouble = Double(longField.text!)
+        let isCorrectLatLong: Bool
+        
+        if isLatDouble! > 90 || isLatDouble! < -90 || isLongDouble! > 180 || isLongDouble! < -80 {
+            isCorrectLatLong = false
+        } else {
+            isCorrectLatLong = true
+        }
+        
+        // Checking if there are any empty fields for certain required parameters + checking to see the latitude and longitude values are correct (using the variables set up above)
+        
+        if eventNameField.text != "" && ageRangeField.text != "" && categoryField.text != "" && dateField.text != "" && startTimeField.text != "" && endTimeField.text != "" && isLatDouble != nil && isLongDouble != nil && isCorrectLatLong == true {
+            
+            
+            // Converting the age and category option parameters from strings (the user input) into the enum form (since the Event struct only accepts the enum form)
+            
+            var ageOption: Data.ageRange
+            var categoryOption: Data.category
+            
+            switch ageRangeField.text {
+            case "13+":
+                ageOption = .age13Up
+            case "16+":
+                ageOption = .age16Up
+            case "13-16":
+                ageOption = .age13to16
+            case "16-18":
+                ageOption = .age16to18
+            default:
+                return
+            }
+            
+            switch categoryField.text {
+            case "Education":
+                categoryOption = .education
+            case "Sports":
+                categoryOption = .sports
+            case "Arts":
+                categoryOption = .arts
+            case "Others":
+                categoryOption = .others
+            default:
+                return
+            }
+            
+            /*
+             Retrieving the user's inputted date, start and end times and converting them into Dates
+             Using the Dates and then extracting the relevant information (the year, month, time etc. as integers)
+             The integers will be inputted when creating the Event struct (since the date and time parameters in the struct use DateComponents and this requires the year, month etc. to be supplied as an integer)
+             */
+            
+            let dateFormatter = DateFormatter()
+            let timeFormatter = DateFormatter()
+            dateFormatter.dateFormat = "dd/MM/yyyy"
+            timeFormatter.dateFormat = "HH:mm"
+            
+            let eventDate = dateFormatter.date(from: dateField.text!)
+            let eventStart = timeFormatter.date(from: startTimeField.text!)
+            let eventEnd = timeFormatter.date(from: endTimeField.text!)
+            
+            let year = Int(NSCalendar.current.component(.year, from: eventDate!))
+            let month = Int(NSCalendar.current.component(.month, from: eventDate!))
+            let day = Int(NSCalendar.current.component(.day, from: eventDate!))
+            
+            let startHour = Int(NSCalendar.current.component(.hour, from: eventStart!))
+            let startMin = Int(NSCalendar.current.component(.minute, from: eventStart!))
+            
+            let endHour = Int(NSCalendar.current.component(.hour, from: eventEnd!))
+            let endMin = Int(NSCalendar.current.component(.minute, from: eventEnd!))
+            
+            /*
+             Appending a new Event to the events list using all of the data provided by the user
+             Some fields will appear as blank since the user has not entered anything (those are optional parameters)
+             The default image will be a white background if the user doesn't provide an event image
+             */
+            
+            Data.eventsList.append(Data.Event(eventName: eventNameField.text!, eventAgeRange: ageOption, category: categoryOption, eventDate: DateComponents(year: year, month: month, day: day), eventStartTime: DateComponents(hour: startHour, minute: startMin), eventEndTime: DateComponents(hour: endHour, minute: endMin), latLocation: isLatDouble!, longLocation: isLongDouble!, descTag1: tag1Field.text!, descTag2: tag2Field.text!, descTag3: tag3Field.text!, eventDesc: descField.text!, eventImage: (imageField.image ?? UIImage(named: "White"))!))
+            
+            // Moving back to the homepage screen
+            
+            let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "mainVCNav")
+            self.present(vc, animated: true, completion: nil)
+            
+        } else {
+            
+            // Showing the error message if all requirements aren't met
+            
+            errorMessage.isHidden = false
+        }
     }
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
