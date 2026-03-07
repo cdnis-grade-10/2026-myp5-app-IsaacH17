@@ -89,6 +89,10 @@ class Data {
         Event(eventName: "Play Sports with Children", eventAgeRange: .age16to18, category: .sports, eventDate: DateComponents(year: 2026, month: 4, day: 10), eventStartTime: DateComponents(hour: 17, minute: 00), eventEndTime: DateComponents(hour: 19, minute: 00), latLocation: 22.28, longLocation: 114.18, descTag1: "Active", descTag2: "Refreshing", descTag3: "", eventDesc: "Come play sports with undepriviledged children!", eventImage: UIImage(named: "PlaySports")!)
     ]
     
+    // Creating a filtered list (will store the filtered events based on the search keywords and filter parameters set in the homepage screen)
+    
+    static var filteredList = Data.eventsList
+    
     // Creating a function to parse the DateComponents from the Events struct into an actual, readable string format
     // Users must give the 3 different DateComponents from the Events struct to be able to extract the actual date of the event + start & end time of the event
     
@@ -128,4 +132,5 @@ class TableViewCell: UITableViewCell {
     @IBOutlet weak var eventDesc: UILabel!
     @IBOutlet weak var recommendLabel: UILabel!
     @IBOutlet weak var eventImage: UIImageView!
+    @IBOutlet weak var learnMoreButton: UIButton!
 }

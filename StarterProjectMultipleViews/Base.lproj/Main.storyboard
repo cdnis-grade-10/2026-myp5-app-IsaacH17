@@ -145,14 +145,14 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FGW-Tk-voR">
-                                <rect key="frame" x="16" y="236" width="128" height="49"/>
+                                <rect key="frame" x="16" y="178" width="128" height="49"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="150" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="2YK-Hv-p4f">
-                                <rect key="frame" x="21" y="348" width="361" height="458"/>
+                                <rect key="frame" x="21" y="290" width="361" height="548"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
@@ -219,6 +219,7 @@
                                             <outlet property="eventDesc" destination="uSQ-3Q-Yd5" id="cFA-1h-xVh"/>
                                             <outlet property="eventImage" destination="Z57-jk-RQM" id="K6e-lc-6ST"/>
                                             <outlet property="eventName" destination="0uF-oD-LF8" id="Dgl-Z9-aWK"/>
+                                            <outlet property="learnMoreButton" destination="Kc4-JK-8T3" id="Q65-Q3-DDO"/>
                                             <outlet property="recommendLabel" destination="Zop-If-VeM" id="5xx-0g-c4k"/>
                                         </connections>
                                     </tableViewCell>
@@ -229,7 +230,7 @@
                                 </connections>
                             </tableView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QeA-cE-DIv">
-                                <rect key="frame" x="311" y="236" width="75" height="35"/>
+                                <rect key="frame" x="311" y="178" width="75" height="35"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="Create"/>
@@ -238,7 +239,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Filter Selection:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HVZ-SI-qa2">
-                                <rect key="frame" x="16" y="291" width="252" height="49"/>
+                                <rect key="frame" x="16" y="233" width="252" height="49"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
@@ -530,6 +531,16 @@
                     <navigationItem key="navigationItem" id="D5y-pI-A9m">
                         <barButtonItem key="rightBarButtonItem" title="Favorite" id="fZI-dK-P3h"/>
                     </navigationItem>
+                    <connections>
+                        <outlet property="ageCatLabel" destination="nN1-B4-Zex" id="0CC-CP-98k"/>
+                        <outlet property="descLabel" destination="oN3-er-AKJ" id="oDj-vO-fN3"/>
+                        <outlet property="eventName" destination="SaA-3u-pnI" id="XTH-Qc-w8C"/>
+                        <outlet property="imageView" destination="8s9-h7-3qO" id="798-du-QAP"/>
+                        <outlet property="organizerDateTimeLabel" destination="cNy-Qk-43v" id="hXa-OG-7Ka"/>
+                        <outlet property="word1" destination="kS1-FB-cOK" id="LN8-ds-2AS"/>
+                        <outlet property="word2" destination="nDQ-q1-CtU" id="ddX-Nr-GDn"/>
+                        <outlet property="word3" destination="02U-sL-tIk" id="Up2-mB-2Rh"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="d3H-Zu-sec" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

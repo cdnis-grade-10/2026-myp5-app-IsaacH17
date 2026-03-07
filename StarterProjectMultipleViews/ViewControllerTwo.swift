@@ -41,11 +41,13 @@ class ViewControllerTwo: UIViewController, UITableViewDataSource, UITableViewDel
     
     let searchController = UISearchController()
     
-    // Creating another events list (will be used to retrieve the new list of events after the user has applied filters)
-    
-    var filteredList = Data.eventsList
+    var cellIndex = 0
+
     
     // MARK: - IBActions and Functions
+    
+
+    
     
     /*
      # of rows in the table will = filtered list / events list count (depending if the search controller is being used (whether the user is currently applying filters or not))
@@ -55,7 +57,7 @@ class ViewControllerTwo: UIViewController, UITableViewDataSource, UITableViewDel
         
         // Returning the filtered list of events --> updateSearchResults is called once this screen is loaded in so the filteredList will show the new list based on the filter (the user's selected user interest)
         
-        return filteredList.count
+        return Data.filteredList.count
         
     }
     
@@ -72,7 +74,9 @@ class ViewControllerTwo: UIViewController, UITableViewDataSource, UITableViewDel
          This gets the event details for one event and then is repeated for all events in the array
          */
         
-        let currentEvent = filteredList[indexPath.row]
+        let currentEvent = Data.filteredList[indexPath.row]
+        
+        print(indexPath.row)
         
         // Populating the table cell with event details based on the current event
         
@@ -81,6 +85,9 @@ class ViewControllerTwo: UIViewController, UITableViewDataSource, UITableViewDel
         tableViewCell.eventAge.text = "Age: " + Data.ageRangeString(ageRange: currentEvent.eventAgeRange)
         tableViewCell.eventDesc.text = "\(currentEvent.descTag1), \(currentEvent.descTag2), \(currentEvent.descTag3)"
         tableViewCell.eventImage.image = currentEvent.eventImage
+        tableViewCell.learnMoreButton.tag = indexPath.row
+        
+        tableViewCell.learnMoreButton.addTarget(self, action: #selector(learnMoreTapped(_:)), for: .touchUpInside)
         
         // If the event aligns with the user's chosen user interest, then there will be a recommended tag applied to the event
         
@@ -94,6 +101,11 @@ class ViewControllerTwo: UIViewController, UITableViewDataSource, UITableViewDel
         
         return tableViewCell
         
+    }
+    
+    @objc func learnMoreTapped(_ sender: UIButton){
+      // use the tag of button as index
+        cellIndex = sender.tag
     }
     
     // Function to initialize search controller
@@ -172,7 +184,7 @@ class ViewControllerTwo: UIViewController, UITableViewDataSource, UITableViewDel
         
         // Creating the filtered list by filtering the full events list
         
-        filteredList = Data.eventsList.filter {
+        Data.filteredList = Data.eventsList.filter {
             
             // For each event in the list:
             
@@ -286,6 +298,12 @@ class ViewControllerTwo: UIViewController, UITableViewDataSource, UITableViewDel
         
         updateSearchResults(for: self.searchController)
         
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let eventDetailsVC = segue.destination as? ViewControllerFour {
+            eventDetailsVC.eventIndex = cellIndex
+        }
     }
 
 }
