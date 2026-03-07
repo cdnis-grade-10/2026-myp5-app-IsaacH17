@@ -48,17 +48,26 @@ class ViewControllerThree: UIViewController, UIPickerViewDelegate, UIPickerViewD
     
     // MARK: - Variables and Constants
     
+    /*
+     Picker view setup
+     Assigning the different options that the picker view will show
+     */
+    
     let agePickerView = UIPickerView()
     let categoryPickerView = UIPickerView()
     
     let ageOptions = ["13+", "16+", "13-16", "16-18"]
     let categoryOptions = ["Education", "Sports", "Arts", "Others"]
     
+    // Date picker setup
+    
     let datePicker = UIDatePicker()
     let startTimePicker = UIDatePicker()
     let endTimePicker = UIDatePicker()
     
     // MARK: - IBActions and Functions
+    
+    // Choosing an image and presenting this screen when the 'select image' button has been pressed
     
     @IBAction func imagePickerButton(_ sender: UIButton) {
         
@@ -69,6 +78,8 @@ class ViewControllerThree: UIViewController, UIPickerViewDelegate, UIPickerViewD
         present(picker, animated: true)
         
     }
+    
+    // Check to see if all of the user's inputted data can be submitted to create a new event
     
     @IBAction func submitButton(_ sender: UIBarButtonItem) {
         
@@ -168,6 +179,8 @@ class ViewControllerThree: UIViewController, UIPickerViewDelegate, UIPickerViewD
         }
     }
     
+    // Controls the image - when the chosen image has been selected and confirmed, it will be attached to the image view
+    
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         guard let image = info[.editedImage] as? UIImage else {
             return
@@ -178,9 +191,13 @@ class ViewControllerThree: UIViewController, UIPickerViewDelegate, UIPickerViewD
         dismiss(animated: true)
     }
     
+    // Only 1 row in the picker view
+    
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
     }
+    
+    // # of rows of the picker view will be determined by whether it is the age or category picker view
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         if pickerView == agePickerView {
@@ -189,6 +206,10 @@ class ViewControllerThree: UIViewController, UIPickerViewDelegate, UIPickerViewD
             return categoryOptions.count
         }
     }
+    
+    /*
+     Displayed info in the picker view is set for both the age & category picker views
+     */
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         if pickerView == agePickerView {
@@ -206,12 +227,19 @@ class ViewControllerThree: UIViewController, UIPickerViewDelegate, UIPickerViewD
         }
     }
     
+    /*
+     Function is run when the date picker info. changes
+     Transforming the dates into string format (specifically the format as shown in dateFormatter and timeFormatter)
+     */
+    
     @objc func datePickerValueChanged(sender: UIDatePicker) {
         
         let dateFormatter = DateFormatter()
         let timeFormatter = DateFormatter()
         dateFormatter.dateFormat = "dd/MM/yyyy"
         timeFormatter.dateFormat = "HH:mm"
+        
+        // Showing the correct information based on the picker view (date / start time / end time)
         
         switch sender {
         case datePicker:
@@ -223,8 +251,6 @@ class ViewControllerThree: UIViewController, UIPickerViewDelegate, UIPickerViewD
         default:
             break
         }
-        // when date picker is changed, this function will be run
-        
         
     }
 
@@ -235,15 +261,19 @@ class ViewControllerThree: UIViewController, UIPickerViewDelegate, UIPickerViewD
         
         errorMessage.isHidden = true
         
+        // Age and category picker view setup
+        
         ageRangeField.inputView = agePickerView
         agePickerView.delegate = self
         
         categoryField.inputView = categoryPickerView
         categoryPickerView.delegate = self
         
-        //date logic
+        // Not allowing the user to choose a date in the past
         
         datePicker.minimumDate = Date()
+        
+        // Assigning the date picker to be a date or time picker and attaching the picker view onto the screen
         
         datePicker.datePickerMode = .date
         startTimePicker.datePickerMode = .time
@@ -252,6 +282,12 @@ class ViewControllerThree: UIViewController, UIPickerViewDelegate, UIPickerViewD
         dateField.inputView = datePicker
         startTimeField.inputView = startTimePicker
         endTimeField.inputView = endTimePicker
+        
+        /*
+         For each of the 3 date pickers (date, start time, end time):
+         - Will be of the wheels appearance
+         - Shows the date / time text when the date / time pickers have been updated
+         */
         
         for picker in [datePicker, startTimePicker, endTimePicker] {
             picker.addTarget(self, action: #selector(datePickerValueChanged(sender:)), for: UIControl.Event.valueChanged)
