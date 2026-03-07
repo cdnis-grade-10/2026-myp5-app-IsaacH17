@@ -27,21 +27,94 @@
 
 import UIKit
 
-class ViewControllerThree: UIViewController {
+class ViewControllerThree: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     // MARK: - IBOutlets
     
-    
+    @IBOutlet weak var eventNameField: UITextField!
+    @IBOutlet weak var ageRangeField: UITextField!
+    @IBOutlet weak var categoryField: UITextField!
+    @IBOutlet weak var dateField: UITextField!
+    @IBOutlet weak var startTimeField: UITextField!
+    @IBOutlet weak var endTimeField: UITextField!
+    @IBOutlet weak var latField: UITextField!
+    @IBOutlet weak var longField: UITextField!
+    @IBOutlet weak var tag1Field: UITextField!
+    @IBOutlet weak var tag2Field: UITextField!
+    @IBOutlet weak var tag3Field: UITextField!
+    @IBOutlet weak var descField: UITextView!
+    @IBOutlet weak var imageField: UIImageView!
+    @IBOutlet weak var errorMessage: UILabel!
     
     // MARK: - Variables and Constants
     
+    let agePickerView = UIPickerView()
+    let categoryPickerView = UIPickerView()
     
+    let ageOptions = ["13+", "16+", "13-16", "16-18"]
+    let categoryOptions = ["Education", "Sports", "Arts", "Others"]
     
     // MARK: - IBActions and Functions
     
+    @IBAction func imagePickerButton(_ sender: UIButton) {
+        
+        let picker = UIImagePickerController()
+        picker.allowsEditing = true
+        picker.delegate = self
+        
+        present(picker, animated: true)
+        
+    }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        guard let image = info[.editedImage] as? UIImage else {
+            return
+        }
+        
+        imageField.image = image
+        
+        dismiss(animated: true)
+    }
+    
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        if pickerView == agePickerView {
+            return ageOptions.count
+        } else {
+            return categoryOptions.count
+        }
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        if pickerView == agePickerView {
+            return ageOptions[row]
+        } else {
+            return categoryOptions[row]
+        }
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        if pickerView == agePickerView {
+            ageRangeField.text = ageOptions[row]
+        } else {
+            categoryField.text = categoryOptions[row]
+        }
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        
+        errorMessage.isHidden = true
+        
+        ageRangeField.inputView = agePickerView
+        agePickerView.delegate = self
+        
+        categoryField.inputView = categoryPickerView
+        categoryPickerView.delegate = self
     }
 }
