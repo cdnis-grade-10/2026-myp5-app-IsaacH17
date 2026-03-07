@@ -40,14 +40,9 @@ class ViewControllerTwo: UIViewController, UITableViewDataSource, UITableViewDel
     // Setting up the search controller
     
     let searchController = UISearchController()
-    
-    var cellIndex = 0
-
+    var chosenEvent: Data.Event?
     
     // MARK: - IBActions and Functions
-    
-
-    
     
     /*
      # of rows in the table will = filtered list / events list count (depending if the search controller is being used (whether the user is currently applying filters or not))
@@ -76,8 +71,6 @@ class ViewControllerTwo: UIViewController, UITableViewDataSource, UITableViewDel
         
         let currentEvent = Data.filteredList[indexPath.row]
         
-        print(indexPath.row)
-        
         // Populating the table cell with event details based on the current event
         
         tableViewCell.eventName.text = currentEvent.eventName
@@ -91,8 +84,6 @@ class ViewControllerTwo: UIViewController, UITableViewDataSource, UITableViewDel
         
         // If the event aligns with the user's chosen user interest, then there will be a recommended tag applied to the event
         
-        print(Data.categoryString(category: currentEvent.category), Data.userInterest)
-        
         if Data.categoryString(category: currentEvent.category) != Data.userInterest {
             tableViewCell.recommendLabel.isHidden = true
         } else {
@@ -105,7 +96,11 @@ class ViewControllerTwo: UIViewController, UITableViewDataSource, UITableViewDel
     
     @objc func learnMoreTapped(_ sender: UIButton){
       // use the tag of button as index
-        cellIndex = sender.tag
+        
+        chosenEvent = Data.filteredList[sender.tag]
+        
+        performSegue(withIdentifier: "segueFourthVC", sender: self)
+        
     }
     
     // Function to initialize search controller
@@ -302,7 +297,9 @@ class ViewControllerTwo: UIViewController, UITableViewDataSource, UITableViewDel
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let eventDetailsVC = segue.destination as? ViewControllerFour {
-            eventDetailsVC.eventIndex = cellIndex
+            eventDetailsVC.retrievedEvent = chosenEvent
+            
+            print(chosenEvent)
         }
     }
 

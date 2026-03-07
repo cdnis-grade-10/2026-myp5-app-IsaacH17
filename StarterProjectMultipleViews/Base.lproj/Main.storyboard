@@ -172,9 +172,6 @@
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <state key="normal" title="Button"/>
                                                     <buttonConfiguration key="configuration" style="plain" title="Learn More"/>
-                                                    <connections>
-                                                        <segue destination="Ivp-lf-pu2" kind="show" id="Gnc-Rx-uJS"/>
-                                                    </connections>
                                                 </button>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0uF-oD-LF8">
                                                     <rect key="frame" x="20" y="37" width="165" height="21"/>
@@ -254,6 +251,7 @@
                         <outlet property="chosenFilter" destination="HVZ-SI-qa2" id="NoD-lI-6w2"/>
                         <outlet property="eventTableView" destination="2YK-Hv-p4f" id="SlI-vW-SzE"/>
                         <outlet property="usernameLabel" destination="FGW-Tk-voR" id="h6V-M4-n3H"/>
+                        <segue destination="Ivp-lf-pu2" kind="show" identifier="segueFourthVC" id="84c-9a-9FA"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ys9-cQ-av3" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

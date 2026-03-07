@@ -19,29 +19,31 @@ class ViewControllerFour: UIViewController {
     @IBOutlet weak var word2: UILabel!
     @IBOutlet weak var word3: UILabel!
     
+    var retrievedEvent: Data.Event?
     
-    
-    var eventIndex = 0
+    //print(retrievedEvent)
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
         
-        print(Data.filteredList)
-        print(eventIndex)
+//        print(Data.filteredList)
+//        print(eventIndex)
         
-        imageView.image = Data.filteredList[eventIndex].eventImage
-        eventName.text = Data.filteredList[eventIndex].eventName
+        //print("POST: \(eventIndex), \(Data.filteredList)")
         
-        organizerDateTimeLabel.text = "Organizer: \(Data.username) | \(Data.parseDateComponent(date: Data.filteredList[eventIndex].eventDate, startTime: Data.filteredList[eventIndex].eventStartTime, endTime: Data.filteredList[eventIndex].eventEndTime))"
+        imageView.image = retrievedEvent?.eventImage
+        eventName.text = retrievedEvent?.eventName
         
-        ageCatLabel.text = "Age: \(Data.ageRangeString(ageRange: Data.filteredList[eventIndex].eventAgeRange)) | Category: \(Data.categoryString(category: Data.filteredList[eventIndex].category))"
+        organizerDateTimeLabel.text = "Organizer: \(Data.username) | \(Data.parseDateComponent(date: retrievedEvent!.eventDate, startTime: retrievedEvent!.eventStartTime, endTime: retrievedEvent!.eventEndTime))"
         
-        descLabel.text = Data.filteredList[eventIndex].eventDesc
-        word1.text = Data.filteredList[eventIndex].descTag1
-        word2.text = Data.filteredList[eventIndex].descTag2
-        word3.text = Data.filteredList[eventIndex].descTag3
+        ageCatLabel.text = "Age: \(Data.ageRangeString(ageRange: retrievedEvent!.eventAgeRange)) | Category: \(Data.categoryString(category: retrievedEvent!.category))"
+        
+        descLabel.text = retrievedEvent?.eventDesc
+        word1.text = retrievedEvent?.descTag1
+        word2.text = retrievedEvent?.descTag2
+        word3.text = retrievedEvent?.descTag3
         
         
         
