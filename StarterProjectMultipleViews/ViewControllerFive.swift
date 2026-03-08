@@ -11,7 +11,11 @@ class ViewControllerFive: UIViewController {
 
     @IBOutlet weak var usernameLabel: UILabel!
     
+    var date: DateComponents = DateComponents()
+    var dateArray: [DateComponents] = []
+    
     @IBAction func homepageButton(_ sender: UIButton) {
+        self.dismiss(animated: true)
         self.present(Data.homepageVc, animated: true, completion: nil)
     }
     
@@ -30,6 +34,7 @@ class ViewControllerFive: UIViewController {
         calendarView.calendar = .current
         calendarView.locale = .current
         calendarView.fontDesign = .rounded
+        //calendarView.availableDateRange
         calendarView.delegate = self
         
         view.addSubview(calendarView)
@@ -40,6 +45,20 @@ class ViewControllerFive: UIViewController {
             calendarView.heightAnchor.constraint(equalToConstant: 600),
             calendarView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor)
         ])
+        
+        
+        
+
+        
+        
+        for event in Data.eventsList where event.isFavorited == true {
+            
+            let
+
+            date = event.eventDate
+            dateArray.append(date)
+
+        }
     }
     
 
@@ -57,12 +76,27 @@ class ViewControllerFive: UIViewController {
 
 extension ViewControllerFive: UICalendarViewDelegate {
     func calendarView(_ calendarView: UICalendarView, decorationFor dateComponents: DateComponents) -> UICalendarView.Decoration? {
+        
+//        guard var month = DateComponents else {
+//            return nil
+//        }
+        
+        guard let year = dateComponents.year else {
+            return nil
+        }
+        
+        guard let month = dateComponents.month else {
+            return nil
+        }
+        
         guard let day = dateComponents.day else {
             return nil
         }
         
-        if !day.isMultiple(of: 2) {
-            return UICalendarView.Decoration.default(color: .systemMint, size: .large)
+        for dateComp in dateArray {
+            if dateComp.year == year && dateComp.month == month && dateComp.day == day {
+                return UICalendarView.Decoration.default(color: .systemMint, size: .large)
+            }
         }
         
         return nil

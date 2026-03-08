@@ -602,6 +602,7 @@
             <objects>
                 <navigationController storyboardIdentifier="mainVCNav" automaticallyAdjustsScrollViewInsets="NO" modalPresentationStyle="fullScreen" id="YAZ-kA-HkH" sceneMemberID="viewController">
                     <toolbarItems/>
+                    <navigationItem key="navigationItem" id="bcW-ce-HSu"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="Wj2-Ra-3RG">
                         <rect key="frame" x="0.0" y="124" width="402" height="54"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -613,7 +614,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VDS-IK-eBy" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="900" y="-631"/>
+            <point key="canvasLocation" x="2304" y="-601"/>
         </scene>
     </scenes>
     <resources>

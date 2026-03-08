@@ -89,17 +89,20 @@ class ViewControllerThree: UIViewController, UIPickerViewDelegate, UIPickerViewD
         
         let isLatDouble = Double(latField.text!)
         let isLongDouble = Double(longField.text!)
-        let isCorrectLatLong: Bool
+        var isCorrectLatLong: Bool = false
         
-        if isLatDouble! > 90 || isLatDouble! < -90 || isLongDouble! > 180 || isLongDouble! < -80 {
-            isCorrectLatLong = false
-        } else {
-            isCorrectLatLong = true
+        if isLatDouble != nil && isLongDouble != nil {
+            if isLatDouble! > 90 || isLatDouble! < -90 || isLongDouble! > 180 || isLongDouble! < -80 {
+                isCorrectLatLong = false
+            } else {
+                isCorrectLatLong = true
+            }
         }
+
         
         // Checking if there are any empty fields for certain required parameters + checking to see the latitude and longitude values are correct (using the variables set up above)
         
-        if eventNameField.text != "" && ageRangeField.text != "" && categoryField.text != "" && dateField.text != "" && startTimeField.text != "" && endTimeField.text != "" && isLatDouble != nil && isLongDouble != nil && isCorrectLatLong == true {
+        if eventNameField.text != "" && ageRangeField.text != "" && categoryField.text != "" && dateField.text != "" && startTimeField.text != "" && endTimeField.text != "" && isCorrectLatLong == true {
             
             
             // Converting the age and category option parameters from strings (the user input) into the enum form (since the Event struct only accepts the enum form)
@@ -168,6 +171,7 @@ class ViewControllerThree: UIViewController, UIPickerViewDelegate, UIPickerViewD
             
             // Moving back to the homepage screen
             
+            self.dismiss(animated: true)
             self.present(Data.homepageVc, animated: true, completion: nil)
             
         } else {
