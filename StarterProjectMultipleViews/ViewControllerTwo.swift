@@ -78,6 +78,12 @@ class ViewControllerTwo: UIViewController, UITableViewDataSource, UITableViewDel
         tableViewCell.eventAge.text = "Age: " + Data.ageRangeString(ageRange: currentEvent.eventAgeRange)
         tableViewCell.eventDesc.text = "\(currentEvent.descTag1), \(currentEvent.descTag2), \(currentEvent.descTag3)"
         tableViewCell.eventImage.image = currentEvent.eventImage
+        
+        /*
+         Assigning the learn more button tag for each row as the index row
+         When pressed, it will run the objc function learnMoreTapped
+         */
+        
         tableViewCell.learnMoreButton.tag = indexPath.row
         
         tableViewCell.learnMoreButton.addTarget(self, action: #selector(learnMoreTapped(_:)), for: .touchUpInside)
@@ -94,8 +100,12 @@ class ViewControllerTwo: UIViewController, UITableViewDataSource, UITableViewDel
         
     }
     
+    /*
+     Uses the button tag to retrieve the exact event struct from the filtered events list (so to access all of the relevant information associated with the event)
+     Segue to fourth VC afterwards (which initiates the override prepare function below)
+     */
+    
     @objc func learnMoreTapped(_ sender: UIButton){
-      // use the tag of button as index
         
         chosenEvent = Data.filteredList[sender.tag]
         
@@ -295,11 +305,14 @@ class ViewControllerTwo: UIViewController, UITableViewDataSource, UITableViewDel
         
     }
     
+    /*
+     When the segue to the 4th VC is performed (when the learn more button is pressed):
+     Send the chosen event (which contains the Event struct details for the selected event) to the retrieved event variable in the 4th VC
+     */
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let eventDetailsVC = segue.destination as? ViewControllerFour {
             eventDetailsVC.retrievedEvent = chosenEvent
-            
-            print(chosenEvent)
         }
     }
 

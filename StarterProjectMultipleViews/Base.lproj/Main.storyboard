@@ -527,12 +527,17 @@
                         <color key="backgroundColor" systemColor="systemTealColor"/>
                     </view>
                     <navigationItem key="navigationItem" id="D5y-pI-A9m">
-                        <barButtonItem key="rightBarButtonItem" title="Favorite" id="fZI-dK-P3h"/>
+                        <barButtonItem key="rightBarButtonItem" title="Favorite" id="fZI-dK-P3h">
+                            <connections>
+                                <action selector="favoriteButton:" destination="Ivp-lf-pu2" id="Hnf-rD-bIj"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="ageCatLabel" destination="nN1-B4-Zex" id="0CC-CP-98k"/>
                         <outlet property="descLabel" destination="oN3-er-AKJ" id="oDj-vO-fN3"/>
                         <outlet property="eventName" destination="SaA-3u-pnI" id="XTH-Qc-w8C"/>
+                        <outlet property="favoriteOutlet" destination="fZI-dK-P3h" id="aB4-Kg-RYa"/>
                         <outlet property="imageView" destination="8s9-h7-3qO" id="798-du-QAP"/>
                         <outlet property="mapView" destination="xgQ-6u-4d5" id="GO9-4y-pli"/>
                         <outlet property="organizerDateTimeLabel" destination="cNy-Qk-43v" id="hXa-OG-7Ka"/>
