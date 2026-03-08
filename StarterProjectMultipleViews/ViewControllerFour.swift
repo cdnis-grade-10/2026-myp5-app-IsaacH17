@@ -6,8 +6,10 @@
 //
 
 import UIKit
+import MapKit
+import CoreLocation
 
-class ViewControllerFour: UIViewController {
+class ViewControllerFour: UIViewController, MKMapViewDelegate {
     
     
     @IBOutlet weak var imageView: UIImageView!
@@ -18,20 +20,33 @@ class ViewControllerFour: UIViewController {
     @IBOutlet weak var word1: UILabel!
     @IBOutlet weak var word2: UILabel!
     @IBOutlet weak var word3: UILabel!
+    @IBOutlet weak var mapView: MKMapView!
     
     var retrievedEvent: Data.Event?
     
-    //print(retrievedEvent)
+    var coordinate = CLLocationCoordinate2D()
+    
+    private func addCustomPin() {
+        let pin = MKPointAnnotation()
+        pin.coordinate = coordinate
+        pin.title = retrievedEvent?.eventName
+        mapView.addAnnotation(pin)
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
         
-//        print(Data.filteredList)
-//        print(eventIndex)
+        coordinate = CLLocationCoordinate2D(latitude: retrievedEvent!.latLocation, longitude: retrievedEvent!.longLocation)
         
-        //print("POST: \(eventIndex), \(Data.filteredList)")
+        mapView.setRegion(MKCoordinateRegion(center: coordinate, span: MKCoordinateSpan(latitudeDelta: 0.1, longitudeDelta: 0.1)), animated: false)
+        
+        mapView.delegate = self
+        
+        addCustomPin()
+        
+        //IGNORE
         
         imageView.image = retrievedEvent?.eventImage
         eventName.text = retrievedEvent?.eventName
