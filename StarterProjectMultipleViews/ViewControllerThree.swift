@@ -27,21 +27,271 @@
 
 import UIKit
 
-class ViewControllerThree: UIViewController {
+class ViewControllerThree: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     // MARK: - IBOutlets
     
-    
+    @IBOutlet weak var eventNameField: UITextField!
+    @IBOutlet weak var ageRangeField: UITextField!
+    @IBOutlet weak var categoryField: UITextField!
+    @IBOutlet weak var dateField: UITextField!
+    @IBOutlet weak var startTimeField: UITextField!
+    @IBOutlet weak var endTimeField: UITextField!
+    @IBOutlet weak var latField: UITextField!
+    @IBOutlet weak var longField: UITextField!
+    @IBOutlet weak var tag1Field: UITextField!
+    @IBOutlet weak var tag2Field: UITextField!
+    @IBOutlet weak var tag3Field: UITextField!
+    @IBOutlet weak var descField: UITextView!
+    @IBOutlet weak var imageField: UIImageView!
+    @IBOutlet weak var errorMessage: UILabel!
     
     // MARK: - Variables and Constants
     
+    /*
+     Picker view setup
+     Assigning the different options that the picker view will show
+     */
     
+    let agePickerView = UIPickerView()
+    let categoryPickerView = UIPickerView()
+    
+    let ageOptions = ["13+", "16+", "13-16", "16-18"]
+    let categoryOptions = ["Education", "Sports", "Arts", "Others"]
+    
+    // Date picker setup
+    
+    let datePicker = UIDatePicker()
+    let startTimePicker = UIDatePicker()
+    let endTimePicker = UIDatePicker()
     
     // MARK: - IBActions and Functions
     
+    // Choosing an image and presenting this screen when the 'select image' button has been pressed
+    
+    @IBAction func imagePickerButton(_ sender: UIButton) {
+        
+        let picker = UIImagePickerController()
+        picker.allowsEditing = true
+        picker.delegate = self
+        
+        present(picker, animated: true)
+        
+    }
+    
+    // Check to see if all of the user's inputted data can be submitted to create a new event
+    
+    @IBAction func submitButton(_ sender: UIBarButtonItem) {
+        
+        /*
+         Checking if the latitude and longitude value are a Double and if their values are within a certain range
+         */
+        
+        let isLatDouble = Double(latField.text!)
+        let isLongDouble = Double(longField.text!)
+        let isCorrectLatLong: Bool
+        
+        if isLatDouble! > 90 || isLatDouble! < -90 || isLongDouble! > 180 || isLongDouble! < -80 {
+            isCorrectLatLong = false
+        } else {
+            isCorrectLatLong = true
+        }
+        
+        // Checking if there are any empty fields for certain required parameters + checking to see the latitude and longitude values are correct (using the variables set up above)
+        
+        if eventNameField.text != "" && ageRangeField.text != "" && categoryField.text != "" && dateField.text != "" && startTimeField.text != "" && endTimeField.text != "" && isLatDouble != nil && isLongDouble != nil && isCorrectLatLong == true {
+            
+            
+            // Converting the age and category option parameters from strings (the user input) into the enum form (since the Event struct only accepts the enum form)
+            
+            var ageOption: Data.ageRange
+            var categoryOption: Data.category
+            
+            switch ageRangeField.text {
+            case "13+":
+                ageOption = .age13Up
+            case "16+":
+                ageOption = .age16Up
+            case "13-16":
+                ageOption = .age13to16
+            case "16-18":
+                ageOption = .age16to18
+            default:
+                return
+            }
+            
+            switch categoryField.text {
+            case "Education":
+                categoryOption = .education
+            case "Sports":
+                categoryOption = .sports
+            case "Arts":
+                categoryOption = .arts
+            case "Others":
+                categoryOption = .others
+            default:
+                return
+            }
+            
+            /*
+             Retrieving the user's inputted date, start and end times and converting them into Dates
+             Using the Dates and then extracting the relevant information (the year, month, time etc. as integers)
+             The integers will be inputted when creating the Event struct (since the date and time parameters in the struct use DateComponents and this requires the year, month etc. to be supplied as an integer)
+             */
+            
+            let dateFormatter = DateFormatter()
+            let timeFormatter = DateFormatter()
+            dateFormatter.dateFormat = "dd/MM/yyyy"
+            timeFormatter.dateFormat = "HH:mm"
+            
+            let eventDate = dateFormatter.date(from: dateField.text!)
+            let eventStart = timeFormatter.date(from: startTimeField.text!)
+            let eventEnd = timeFormatter.date(from: endTimeField.text!)
+            
+            let year = Int(NSCalendar.current.component(.year, from: eventDate!))
+            let month = Int(NSCalendar.current.component(.month, from: eventDate!))
+            let day = Int(NSCalendar.current.component(.day, from: eventDate!))
+            
+            let startHour = Int(NSCalendar.current.component(.hour, from: eventStart!))
+            let startMin = Int(NSCalendar.current.component(.minute, from: eventStart!))
+            
+            let endHour = Int(NSCalendar.current.component(.hour, from: eventEnd!))
+            let endMin = Int(NSCalendar.current.component(.minute, from: eventEnd!))
+            
+            /*
+             Appending a new Event to the events list using all of the data provided by the user
+             Some fields will appear as blank since the user has not entered anything (those are optional parameters)
+             The default image will be a white background if the user doesn't provide an event image
+             */
+            
+            Data.eventsList.append(Data.Event(eventName: eventNameField.text!, eventAgeRange: ageOption, category: categoryOption, eventDate: DateComponents(year: year, month: month, day: day), eventStartTime: DateComponents(hour: startHour, minute: startMin), eventEndTime: DateComponents(hour: endHour, minute: endMin), latLocation: isLatDouble!, longLocation: isLongDouble!, descTag1: tag1Field.text!, descTag2: tag2Field.text!, descTag3: tag3Field.text!, eventDesc: descField.text!, eventImage: (imageField.image ?? UIImage(named: "White"))!))
+            
+            // Moving back to the homepage screen
+            
+            self.present(Data.homepageVc, animated: true, completion: nil)
+            
+        } else {
+            
+            // Showing the error message if all requirements aren't met
+            
+            errorMessage.isHidden = false
+        }
+    }
+    
+    // Controls the image - when the chosen image has been selected and confirmed, it will be attached to the image view
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        guard let image = info[.editedImage] as? UIImage else {
+            return
+        }
+        
+        imageField.image = image
+        
+        dismiss(animated: true)
+    }
+    
+    // Only 1 row in the picker view
+    
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    // # of rows of the picker view will be determined by whether it is the age or category picker view
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        if pickerView == agePickerView {
+            return ageOptions.count
+        } else {
+            return categoryOptions.count
+        }
+    }
+    
+    /*
+     Displayed info in the picker view is set for both the age & category picker views
+     */
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        if pickerView == agePickerView {
+            return ageOptions[row]
+        } else {
+            return categoryOptions[row]
+        }
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        if pickerView == agePickerView {
+            ageRangeField.text = ageOptions[row]
+        } else {
+            categoryField.text = categoryOptions[row]
+        }
+    }
+    
+    /*
+     Function is run when the date picker info. changes
+     Transforming the dates into string format (specifically the format as shown in dateFormatter and timeFormatter)
+     */
+    
+    @objc func datePickerValueChanged(sender: UIDatePicker) {
+        
+        let dateFormatter = DateFormatter()
+        let timeFormatter = DateFormatter()
+        dateFormatter.dateFormat = "dd/MM/yyyy"
+        timeFormatter.dateFormat = "HH:mm"
+        
+        // Showing the correct information based on the picker view (date / start time / end time)
+        
+        switch sender {
+        case datePicker:
+            dateField.text = dateFormatter.string(from: sender.date)
+        case startTimePicker:
+            startTimeField.text = timeFormatter.string(from: sender.date)
+        case endTimePicker:
+            endTimeField.text = timeFormatter.string(from: sender.date)
+        default:
+            break
+        }
+        
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        
+        errorMessage.isHidden = true
+        
+        // Age and category picker view setup
+        
+        ageRangeField.inputView = agePickerView
+        agePickerView.delegate = self
+        
+        categoryField.inputView = categoryPickerView
+        categoryPickerView.delegate = self
+        
+        // Not allowing the user to choose a date in the past
+        
+        datePicker.minimumDate = Date()
+        
+        // Assigning the date picker to be a date or time picker and attaching the picker view onto the screen
+        
+        datePicker.datePickerMode = .date
+        startTimePicker.datePickerMode = .time
+        endTimePicker.datePickerMode = .time
+        
+        dateField.inputView = datePicker
+        startTimeField.inputView = startTimePicker
+        endTimeField.inputView = endTimePicker
+        
+        /*
+         For each of the 3 date pickers (date, start time, end time):
+         - Will be of the wheels appearance
+         - Shows the date / time text when the date / time pickers have been updated
+         */
+        
+        for picker in [datePicker, startTimePicker, endTimePicker] {
+            picker.addTarget(self, action: #selector(datePickerValueChanged(sender:)), for: UIControl.Event.valueChanged)
+            picker.preferredDatePickerStyle = .wheels
+        }
+        
     }
 }
