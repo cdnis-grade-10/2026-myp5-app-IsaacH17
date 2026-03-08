@@ -132,5 +132,4 @@ class TableViewCell: UITableViewCell {
     @IBOutlet weak var eventDesc: UILabel!
     @IBOutlet weak var recommendLabel: UILabel!
     @IBOutlet weak var eventImage: UIImageView!
-    @IBOutlet weak var learnMoreButton: UIButton!
 }

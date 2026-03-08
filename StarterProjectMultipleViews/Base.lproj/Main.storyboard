@@ -167,12 +167,6 @@
                                                     <rect key="frame" x="0.0" y="15" width="361" height="120"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 </imageView>
-                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Kc4-JK-8T3">
-                                                    <rect key="frame" x="250" y="87" width="111" height="35"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <state key="normal" title="Button"/>
-                                                    <buttonConfiguration key="configuration" style="plain" title="Learn More"/>
-                                                </button>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0uF-oD-LF8">
                                                     <rect key="frame" x="20" y="37" width="165" height="21"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -208,6 +202,13 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Learn More" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SDl-kz-DDb">
+                                                    <rect key="frame" x="254" y="93" width="87" height="21"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" systemColor="systemBlueColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                         </tableViewCellContentView>
                                         <connections>
@@ -216,7 +217,6 @@
                                             <outlet property="eventDesc" destination="uSQ-3Q-Yd5" id="cFA-1h-xVh"/>
                                             <outlet property="eventImage" destination="Z57-jk-RQM" id="K6e-lc-6ST"/>
                                             <outlet property="eventName" destination="0uF-oD-LF8" id="Dgl-Z9-aWK"/>
-                                            <outlet property="learnMoreButton" destination="Kc4-JK-8T3" id="Q65-Q3-DDO"/>
                                             <outlet property="recommendLabel" destination="Zop-If-VeM" id="5xx-0g-c4k"/>
                                         </connections>
                                     </tableViewCell>
@@ -469,7 +469,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xgQ-6u-4d5">
-                                <rect key="frame" x="28" y="613" width="345" height="236"/>
+                                <rect key="frame" x="55" y="613" width="287" height="236"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <standardMapConfiguration key="preferredConfiguration"/>
                             </mapView>
@@ -529,7 +529,7 @@
                     <navigationItem key="navigationItem" id="D5y-pI-A9m">
                         <barButtonItem key="rightBarButtonItem" title="Favorite" id="fZI-dK-P3h">
                             <connections>
-                                <action selector="favoriteButton:" destination="Ivp-lf-pu2" id="Hnf-rD-bIj"/>
+                                <action selector="favoriteButton:" destination="Ivp-lf-pu2" id="M8e-bL-9fp"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -537,7 +537,7 @@
                         <outlet property="ageCatLabel" destination="nN1-B4-Zex" id="0CC-CP-98k"/>
                         <outlet property="descLabel" destination="oN3-er-AKJ" id="oDj-vO-fN3"/>
                         <outlet property="eventName" destination="SaA-3u-pnI" id="XTH-Qc-w8C"/>
-                        <outlet property="favoriteOutlet" destination="fZI-dK-P3h" id="aB4-Kg-RYa"/>
+                        <outlet property="favoriteOutlet" destination="fZI-dK-P3h" id="IPo-kQ-zaw"/>
                         <outlet property="imageView" destination="8s9-h7-3qO" id="798-du-QAP"/>
                         <outlet property="mapView" destination="xgQ-6u-4d5" id="GO9-4y-pli"/>
                         <outlet property="organizerDateTimeLabel" destination="cNy-Qk-43v" id="hXa-OG-7Ka"/>
@@ -575,6 +575,9 @@
         </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemBlueColor">
+            <color red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemGreenColor">
             <color red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

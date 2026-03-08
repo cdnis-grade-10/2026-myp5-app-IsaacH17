@@ -40,7 +40,6 @@ class ViewControllerTwo: UIViewController, UITableViewDataSource, UITableViewDel
     // Setting up the search controller
     
     let searchController = UISearchController()
-    var chosenEvent: Data.Event?
     
     // MARK: - IBActions and Functions
     
@@ -79,15 +78,6 @@ class ViewControllerTwo: UIViewController, UITableViewDataSource, UITableViewDel
         tableViewCell.eventDesc.text = "\(currentEvent.descTag1), \(currentEvent.descTag2), \(currentEvent.descTag3)"
         tableViewCell.eventImage.image = currentEvent.eventImage
         
-        /*
-         Assigning the learn more button tag for each row as the index row
-         When pressed, it will run the objc function learnMoreTapped
-         */
-        
-        tableViewCell.learnMoreButton.tag = indexPath.row
-        
-        tableViewCell.learnMoreButton.addTarget(self, action: #selector(learnMoreTapped(_:)), for: .touchUpInside)
-        
         // If the event aligns with the user's chosen user interest, then there will be a recommended tag applied to the event
         
         if Data.categoryString(category: currentEvent.category) != Data.userInterest {
@@ -100,17 +90,10 @@ class ViewControllerTwo: UIViewController, UITableViewDataSource, UITableViewDel
         
     }
     
-    /*
-     Uses the button tag to retrieve the exact event struct from the filtered events list (so to access all of the relevant information associated with the event)
-     Segue to fourth VC afterwards (which initiates the override prepare function below)
-     */
+    // Segue to 4th VC if the row is clicked on
     
-    @objc func learnMoreTapped(_ sender: UIButton){
-        
-        chosenEvent = Data.filteredList[sender.tag]
-        
-        performSegue(withIdentifier: "segueFourthVC", sender: self)
-        
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        self.performSegue(withIdentifier: "segueFourthVC", sender: self)
     }
     
     // Function to initialize search controller
@@ -306,13 +289,20 @@ class ViewControllerTwo: UIViewController, UITableViewDataSource, UITableViewDel
     }
     
     /*
-     When the segue to the 4th VC is performed (when the learn more button is pressed):
-     Send the chosen event (which contains the Event struct details for the selected event) to the retrieved event variable in the 4th VC
+     When the segue to the 4th VC is performed (when the cell row is pressed):
+     - Get the index path of the cell
+     - Use the index path to get the Event struct from the filtered list
+     - Send the Event struct to the 4th VC so it can access the event details for the user's selected event
      */
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let eventDetailsVC = segue.destination as? ViewControllerFour {
-            eventDetailsVC.retrievedEvent = chosenEvent
+        
+        if segue.identifier == "segueFourthVC" {
+            let indexPath = self.eventTableView.indexPathForSelectedRow!
+            
+            let eventDetailsVC = segue.destination as? ViewControllerFour
+            
+            eventDetailsVC!.retrievedEvent = Data.filteredList[indexPath.row]
         }
     }
 

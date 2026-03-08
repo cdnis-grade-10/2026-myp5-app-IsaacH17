@@ -112,6 +112,14 @@ class ViewControllerFour: UIViewController, MKMapViewDelegate {
         word2.text = retrievedEvent?.descTag2
         word3.text = retrievedEvent?.descTag3
         
+        // Showing that the event has already been favorited if this is true
+        
+        eventArrayIndex = searchEventArray(eventName: eventName.text!)!
+        
+        if Data.eventsList[eventArrayIndex].isFavorited == true {
+            favoriteOutlet.title = "Favorited!"
+        }
+        
     }
 
     /*
