@@ -78,6 +78,16 @@ class ViewControllerFour: UIViewController, MKMapViewDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        /*
+         If missingNavBar = true (meaning the user came from the profile screen):
+         - Use the event index set from the profile VC (otherwise retrievedEvent will be determined through the homepage screen by clicking on one of the events)
+         */
+        
+        if Data.missingNavBar == true {
+            retrievedEvent = Data.eventsList[Data.eventIndex]
+            Data.missingNavBar = false
+        }
 
         // Do any additional setup after loading the view.
         

@@ -15,6 +15,17 @@ class Data {
     static var username = ""
     static var userInterest = ""
     
+    
+    
+    /*
+     eventIndex stores the index of the event in the eventsList from the profile VCs (since has to go from profile VC --> via homepage --> event details screen and therefore the data can't be passed directly from profile VC --> event details screen using override prepare
+     missingNavBar just determines whether we are reaching the homepage screen from the profile VC or not
+     - If we are, then in the homepage VC it will directly direct the user to the event details page
+     */
+    
+    static var eventIndex = 0
+    static var missingNavBar = false
+    
     // Used to manually perform the segue to the homepage screen
     
     static let homepageVc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "mainVCNav")

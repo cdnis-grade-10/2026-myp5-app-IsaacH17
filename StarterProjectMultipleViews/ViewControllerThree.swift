@@ -92,10 +92,10 @@ class ViewControllerThree: UIViewController, UIPickerViewDelegate, UIPickerViewD
         var isCorrectLatLong: Bool = false
         
         if isLatDouble != nil && isLongDouble != nil {
-            if isLatDouble! > 90 || isLatDouble! < -90 || isLongDouble! > 180 || isLongDouble! < -80 {
-                isCorrectLatLong = false
-            } else {
+            if isLatDouble! <= 90 && isLatDouble! >= -90 && isLongDouble! <= 180 && isLongDouble! >= -180 {
                 isCorrectLatLong = true
+            } else {
+                isCorrectLatLong = false
             }
         }
 
@@ -170,9 +170,9 @@ class ViewControllerThree: UIViewController, UIPickerViewDelegate, UIPickerViewD
             Data.eventsList.append(Data.Event(eventName: eventNameField.text!, eventAgeRange: ageOption, category: categoryOption, eventDate: DateComponents(year: year, month: month, day: day), eventStartTime: DateComponents(hour: startHour, minute: startMin), eventEndTime: DateComponents(hour: endHour, minute: endMin), latLocation: isLatDouble!, longLocation: isLongDouble!, descTag1: tag1Field.text!, descTag2: tag2Field.text!, descTag3: tag3Field.text!, eventDesc: descField.text!, eventImage: (imageField.image ?? UIImage(named: "White"))!))
             
             // Moving back to the homepage screen
-            
-            self.dismiss(animated: true)
-            self.present(Data.homepageVc, animated: true, completion: nil)
+
+            self.navigationController?.popToRootViewController(animated: true)
+
             
         } else {
             

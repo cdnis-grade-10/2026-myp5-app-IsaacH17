@@ -453,8 +453,8 @@
                         <outlet property="errorMessage" destination="naH-z9-faC" id="JvF-D8-ZFe"/>
                         <outlet property="eventNameField" destination="98W-XR-Vg4" id="i1g-7i-7SG"/>
                         <outlet property="imageField" destination="UMb-Fd-4dK" id="uvl-5C-6Mh"/>
-                        <outlet property="latField" destination="i72-BX-mKh" id="oF5-DC-kD2"/>
-                        <outlet property="longField" destination="i72-BX-mKh" id="yzZ-AL-B8n"/>
+                        <outlet property="latField" destination="hmd-XZ-yDE" id="HaX-pO-4MO"/>
+                        <outlet property="longField" destination="i72-BX-mKh" id="rHx-Zz-Ed2"/>
                         <outlet property="startTimeField" destination="odo-KI-Mml" id="1LG-yC-iNz"/>
                         <outlet property="tag1Field" destination="po3-D9-H2C" id="MgM-2e-zNi"/>
                         <outlet property="tag2Field" destination="Clu-G6-MzT" id="5pW-kB-0z6"/>
@@ -468,7 +468,7 @@
         <!--View Controller Four-->
         <scene sceneID="HGO-xk-Tvr">
             <objects>
-                <viewController id="Ivp-lf-pu2" customClass="ViewControllerFour" customModule="StarterProjectMultipleViews" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="eventDetailsScreen" modalPresentationStyle="fullScreen" id="Ivp-lf-pu2" customClass="ViewControllerFour" customModule="StarterProjectMultipleViews" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Cfg-fB-wIM">
                         <rect key="frame" x="0.0" y="0.0" width="402" height="874"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

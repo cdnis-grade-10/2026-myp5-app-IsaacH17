@@ -277,9 +277,22 @@ class ViewControllerTwo: UIViewController, UITableViewDataSource, UITableViewDel
         
     }
     
+    /*
+     When the view appears, check if the user came from the profile VC (which would make missingNavBar true)
+     If so, then immediately direct them to the event details screen (since that is their end destination)
+     */
+    
+    override func viewDidAppear(_ animated: Bool) {
+        if Data.missingNavBar == true {
+            self.performSegue(withIdentifier: "segueFourthVC", sender: self)
+        }
+    }
+    
     override func viewDidLoad() {
+        
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+
         
         // Welcoming the user using their name & displaying the search controller
         
@@ -297,16 +310,20 @@ class ViewControllerTwo: UIViewController, UITableViewDataSource, UITableViewDel
      - Get the index path of the cell
      - Use the index path to get the Event struct from the filtered list
      - Send the Event struct to the 4th VC so it can access the event details for the user's selected event
+     
+     Only executes if the indexPath has a value (meaning the user clicked the event from the homepage screen)
+     If the above is false (the user is just bypassing the homepage screen via the profile VC then this can be ignored)
      */
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
-        if segue.identifier == "segueFourthVC" {
-            let indexPath = self.eventTableView.indexPathForSelectedRow!
+        let indexPath = self.eventTableView.indexPathForSelectedRow
+        
+        if segue.identifier == "segueFourthVC" && indexPath != nil {
             
             let eventDetailsVC = segue.destination as? ViewControllerFour
             
-            eventDetailsVC!.retrievedEvent = Data.filteredList[indexPath.row]
+            eventDetailsVC!.retrievedEvent = Data.filteredList[indexPath!.row]
         }
     }
 
