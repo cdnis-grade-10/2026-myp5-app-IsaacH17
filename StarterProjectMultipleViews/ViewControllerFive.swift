@@ -15,28 +15,28 @@ class ViewControllerFive: UIViewController, UICalendarSelectionSingleDateDelegat
     var date: DateComponents = DateComponents()
     var dateArray: [DateComponents] = []
     
+    // Going back to the homepage if pressed
+    
     @IBAction func homepageButton(_ sender: UIButton) {
         self.dismiss(animated: true)
         self.present(Data.homepageVc, animated: true, completion: nil)
     }
     
+    // If a date has been selected, check which Event struct in the eventsList array contains the exact same date
+    
     func searchEventDateArray(eventDate: DateComponents) -> Int? {
         return Data.eventsList.firstIndex {$0.eventDate.year == eventDate.year && $0.eventDate.month == eventDate.month && $0.eventDate.day == eventDate.day}
     }
     
+    /*
+     If a date has been selected:
+     Find the event index of the event within the eventsList array
+     Sets missingNavBar to true and goes to homepage VC --> essentially this in combination with code in other VCs allows for the eventIndex to be sent to the event detils screen and for the user to arrive at the event details screen (not possible to do so directly)
+     */
+    
     func dateSelection(_ selection: UICalendarSelectionSingleDate, didSelectDate dateComponents: DateComponents?) {
         
-//        if dateComponents in dateArray == true {
-//            
-//
-//            
-//        } else {
-//            return
-//        }
-        
         Data.eventIndex = searchEventDateArray(eventDate: dateComponents!)!
-        
-        
         
         Data.missingNavBar = true
         self.dismiss(animated: true)
@@ -44,13 +44,20 @@ class ViewControllerFive: UIViewController, UICalendarSelectionSingleDateDelegat
         
     }
     
+    // Checks to see which dates can be selected (if there is a favorited event on that day) and which can't
+    
     func dateSelection(_ selection: UICalendarSelectionSingleDate, canSelectDate dateComponents: DateComponents?) -> Bool {
         
+        // Getting the individual year, month, day for each date in the calendar
+        
         let year = dateComponents?.year
-        
         let month = dateComponents?.month
-        
         let day = dateComponents?.day
+        
+        /*
+         If the current date is present within the date array (there is a favorited event with the exact same dates), then it can be selected
+         Else, that date will be disabled for selection
+         */
         
         for dateComp in dateArray {
             if dateComp.year == year && dateComp.month == month && dateComp.day == day {
@@ -62,9 +69,6 @@ class ViewControllerFive: UIViewController, UICalendarSelectionSingleDateDelegat
         
     }
     
-    
-//    eventArrayIndex = searchEventArray(eventName: eventName.text!)!
-    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -74,9 +78,7 @@ class ViewControllerFive: UIViewController, UICalendarSelectionSingleDateDelegat
         
         usernameLabel.text = "Hello, " + Data.username
         
-        //*****CALENDAR****
-        
-        // Setting up the calendar & its design
+        // Setting up the calendar, its design, other QoL (eg. preventing dates in the past)
         
         let calendarView = UICalendarView()
         calendarView.translatesAutoresizingMaskIntoConstraints = false
@@ -91,6 +93,8 @@ class ViewControllerFive: UIViewController, UICalendarSelectionSingleDateDelegat
         let selection = UICalendarSelectionSingleDate(delegate: self)
         calendarView.selectionBehavior = selection
         
+        // Adding the calendar and giving it constraints
+        
         view.addSubview(calendarView)
         
         NSLayoutConstraint.activate([
@@ -99,6 +103,11 @@ class ViewControllerFive: UIViewController, UICalendarSelectionSingleDateDelegat
             calendarView.heightAnchor.constraint(equalToConstant: 600),
             calendarView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor)
         ])
+        
+        /*
+         Logic to determine which dates will have the green dot (to signify the user's favorited event is held on that day)
+         Checks all events in the events list --> if favorited, then the DateComponents of that date will be added to the dateArray
+         */
         
         for event in Data.eventsList where event.isFavorited == true {
 
@@ -128,17 +137,9 @@ extension ViewControllerFive: UICalendarViewDelegate {
         
         // Getting the year, month, and day of each element of the UICalendarView
         
-        guard let year = dateComponents.year else {
-            return nil
-        }
-        
-        guard let month = dateComponents.month else {
-            return nil
-        }
-        
-        guard let day = dateComponents.day else {
-            return nil
-        }
+        let year = dateComponents.year
+        let month = dateComponents.month
+        let day = dateComponents.day
         
         /*
          If the exact date is present within the date array (which stores the dates of the user's favorited events), then we can add the decoration dot to signify so)
