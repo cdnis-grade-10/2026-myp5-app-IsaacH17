@@ -12,14 +12,24 @@ class ViewControllerFive: UIViewController, UICalendarSelectionSingleDateDelegat
 
     @IBOutlet weak var usernameLabel: UILabel!
     
+    // Used for the calendar
+    
     var date: DateComponents = DateComponents()
+    
+    // Stores of all the dates that are required to have a decoration (meaning there is an event on that day that the user has favorited)
+    
     var dateArray: [DateComponents] = []
+    
+    // Traverses to the homepage screen
     
     @IBAction func homepageButton(_ sender: UIButton) {
         performSegue(withIdentifier: "fifthToHomeScreen", sender: self)
     }
     
-    // If a date has been selected, check which Event struct in the eventsList array contains the exact same date
+    /*
+     If a date has been selected, check which Event struct in the eventsList array contains the exact same date
+     Necessary as when a date is selected, the user wants to find out the event associated with the date. By doing this, we identify the event in question in the eventsList array.
+     */
     
     func searchEventDateArray(eventDate: DateComponents) -> Int? {
         return Data.eventsList.firstIndex {$0.eventDate.year == eventDate.year && $0.eventDate.month == eventDate.month && $0.eventDate.day == eventDate.day}
@@ -28,7 +38,9 @@ class ViewControllerFive: UIViewController, UICalendarSelectionSingleDateDelegat
     /*
      If a date has been selected:
      Find the event index of the event within the eventsList array
-     Sets missingNavBar to true and goes to homepage VC --> essentially this in combination with code in other VCs allows for the eventIndex to be sent to the event detils screen and for the user to arrive at the event details screen (not possible to do so directly)
+     Set traversalOnly to true and go to the homepage screen
+     - To go to the event details page (which is the goal since selecting the date it supposed to then show the actual event associated with the event), we must go through the homepage VC to reach the event details page or else the event creator & event details page will lose their nav bar
+     - By setting it to true, the homepage screen will understand that the user is trying to reach the event details page and thus direct them there immediately
      */
     
     func dateSelection(_ selection: UICalendarSelectionSingleDate, didSelectDate dateComponents: DateComponents?) {
@@ -36,8 +48,6 @@ class ViewControllerFive: UIViewController, UICalendarSelectionSingleDateDelegat
         Data.eventIndex = searchEventDateArray(eventDate: dateComponents!)!
         
         Data.traversalOnly = true
-//        self.dismiss(animated: true)
-//        self.present(Data.homepageVc, animated: true, completion: nil)
         
         performSegue(withIdentifier: "fifthToHomeScreen", sender: self)
         
