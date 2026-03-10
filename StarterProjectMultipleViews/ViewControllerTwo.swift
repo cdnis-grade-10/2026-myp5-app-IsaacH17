@@ -41,6 +41,10 @@ class ViewControllerTwo: UIViewController, UITableViewDataSource, UITableViewDel
     
     let searchController = UISearchController()
     
+    // Determining whether the user has just entered this screen from another screen --> meaning that there won't be any filters yet and thus the events list should be sorted according to the user's category preference
+    
+    var firstTimeLoad = false
+    
     // MARK: - IBActions and Functions
     
     // Using instantiateViewController to direct the user to the profile calendar page when the button is clicked (as using a direct segue would result the event creator and event detail pages losing their nav bars)
@@ -162,7 +166,7 @@ class ViewControllerTwo: UIViewController, UITableViewDataSource, UITableViewDel
          Usually hpapens when the user enters this screen from the signup page
          */
         
-        if searchController.isActive == false {
+        if firstTimeLoad == true {
             
             switch Data.userInterest {
             case "Education":
@@ -178,6 +182,8 @@ class ViewControllerTwo: UIViewController, UITableViewDataSource, UITableViewDel
             }
             
         }
+        
+        firstTimeLoad = false
         
         // Filtering the events list
         
@@ -301,6 +307,11 @@ class ViewControllerTwo: UIViewController, UITableViewDataSource, UITableViewDel
         if Data.traversalOnly == true {
             self.performSegue(withIdentifier: "segueFourthVC", sender: self)
         }
+        
+        // Reload the events list (as viewDidAppear is triggered and not viewDidLoad when the user comes back to the homepage screen from the event creator screen)
+        
+        firstTimeLoad = true
+        updateSearchResults(for: self.searchController)
     }
     
     override func viewDidLoad() {
@@ -318,7 +329,8 @@ class ViewControllerTwo: UIViewController, UITableViewDataSource, UITableViewDel
          Updating the homepage screen events list
          Eg. When the user loads into this screen from the homepage screen, the list of events will be automatically filtered based on their chosen category preference
          */
-        
+
+        firstTimeLoad = true
         updateSearchResults(for: self.searchController)
         
     }
