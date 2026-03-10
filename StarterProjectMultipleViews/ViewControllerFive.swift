@@ -15,11 +15,8 @@ class ViewControllerFive: UIViewController, UICalendarSelectionSingleDateDelegat
     var date: DateComponents = DateComponents()
     var dateArray: [DateComponents] = []
     
-    // Going back to the homepage if pressed
-    
     @IBAction func homepageButton(_ sender: UIButton) {
-        self.dismiss(animated: true)
-        self.present(Data.homepageVc, animated: true, completion: nil)
+        performSegue(withIdentifier: "fifthToHomeScreen", sender: self)
     }
     
     // If a date has been selected, check which Event struct in the eventsList array contains the exact same date
@@ -38,9 +35,11 @@ class ViewControllerFive: UIViewController, UICalendarSelectionSingleDateDelegat
         
         Data.eventIndex = searchEventDateArray(eventDate: dateComponents!)!
         
-        Data.missingNavBar = true
-        self.dismiss(animated: true)
-        self.present(Data.homepageVc, animated: true, completion: nil)
+        Data.traversalOnly = true
+//        self.dismiss(animated: true)
+//        self.present(Data.homepageVc, animated: true, completion: nil)
+        
+        performSegue(withIdentifier: "fifthToHomeScreen", sender: self)
         
     }
     

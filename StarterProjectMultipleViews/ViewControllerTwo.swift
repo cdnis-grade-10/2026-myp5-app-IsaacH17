@@ -30,7 +30,7 @@ import UIKit
 class ViewControllerTwo: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchResultsUpdating, UISearchBarDelegate {
     
     // MARK: - IBOutlets
-
+    
     @IBOutlet weak var usernameLabel: UILabel!
     @IBOutlet weak var chosenFilter: UILabel!
     @IBOutlet weak var eventTableView: UITableView!
@@ -43,12 +43,15 @@ class ViewControllerTwo: UIViewController, UITableViewDataSource, UITableViewDel
     
     // MARK: - IBActions and Functions
     
+    // Using instantiateViewController to direct the user to the profile calendar page when the button is clicked (as using a direct segue would result the event creator and event detail pages losing their nav bars)
+    
     @IBAction func profileScreen(_ sender: UIButton) {
         let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "profileCalendarScreen")
         self.present(vc, animated: true, completion: nil)
     }
+    
     /*
-     # of rows in the table will = filtered list / events list count (depending if the search controller is being used (whether the user is currently applying filters or not))
+     # of rows in the table will equal the filtered list / events list count (depending if the search controller is being used (whether the user is currently applying filters or not))
      */
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -94,9 +97,22 @@ class ViewControllerTwo: UIViewController, UITableViewDataSource, UITableViewDel
         
     }
     
-    // Segue to 4th VC if the row is clicked on
+    // When the user clicks on the event row (wants to learn more about the event):
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        // Get the index of the row, which can be used to find the Event struct by using the index within the filtered list (as all of the events that are presented in the table view format are a part of filtered list (since the list has been filtered through)
+        
+        let indexPath = self.eventTableView.indexPathForSelectedRow
+        let eventChosen = Data.filteredList[indexPath!.row]
+        
+        /*
+         Find the same Event struct within the main event array (as this never changes unlike the filtered event array) and get its index and store it
+         This index will be used later to access the desired Event struct through the events list array
+         */
+        
+        Data.eventIndex = Data.searchEventArray(eventName: eventChosen.eventName)!
+        
         self.performSegue(withIdentifier: "segueFourthVC", sender: self)
     }
     
@@ -121,8 +137,6 @@ class ViewControllerTwo: UIViewController, UITableViewDataSource, UITableViewDel
         
         if #available(iOS 26.0, *) {
             navigationItem.searchBarPlacementAllowsToolbarIntegration = false
-        } else {
-            // Fallback on earlier versions
         }
         
         
@@ -145,6 +159,7 @@ class ViewControllerTwo: UIViewController, UITableViewDataSource, UITableViewDel
         /*
          If the search controller is inactive (essentially when no filters have been applied at all which usually happens when the homepage screen is first loaded in):
          The filter will be the user's selected interest (so that the events list is filtered based on the user's interest preference)
+         Usually hpapens when the user enters this screen from the signup page
          */
         
         if searchController.isActive == false {
@@ -214,11 +229,11 @@ class ViewControllerTwo: UIViewController, UITableViewDataSource, UITableViewDel
             
             /*
              Looking at the category filters
-             - Checking if the selected filters match the event's category - if so then filter category = event category criteria is met
+             - Checking if the selected filter matches the event's category - if so, then filter category = event category criteria is met
              */
             
             var correctFilterCategory = false
-                        
+            
             switch scopeButton {
             case "All":
                 correctFilterCategory = true
@@ -247,7 +262,7 @@ class ViewControllerTwo: UIViewController, UITableViewDataSource, UITableViewDel
                 break
             }
             
-            // Seeing if any of the 3 criteria have been met
+            // Seeing if any of the 3 criteria have been met (not possible for all to be true, eg. a filter can only be categorical or age range based and thus can only meet 1 out of the 2 options (correctFilterCategory and ageRangeTrue)
             
             let scopeMatch = (correctFilterCategory == true || ageRangeTrue == true || event.eventName.lowercased().contains(scopeButton.lowercased()))
             
@@ -278,12 +293,12 @@ class ViewControllerTwo: UIViewController, UITableViewDataSource, UITableViewDel
     }
     
     /*
-     When the view appears, check if the user came from the profile VC (which would make missingNavBar true)
-     If so, then immediately direct them to the event details screen (since that is their end destination)
+     If the user is traversing via the homepage screen to reach the event details page (can't directly go to the event details page from any of the 2 profile VCs as this would result in the nav bars from the 3rd and 4th screens to disappear):
+     - Then directly direct them to the event details VC using the segue
      */
     
     override func viewDidAppear(_ animated: Bool) {
-        if Data.missingNavBar == true {
+        if Data.traversalOnly == true {
             self.performSegue(withIdentifier: "segueFourthVC", sender: self)
         }
     }
@@ -292,39 +307,19 @@ class ViewControllerTwo: UIViewController, UITableViewDataSource, UITableViewDel
         
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-
+        
         
         // Welcoming the user using their name & displaying the search controller
         
         usernameLabel.text = "Hello, " + Data.username
         initSearchController()
         
-        // Updating the homepage screen events list to filter the events based on the user's selected interest when the user loads into the screen for the 1st time
+        /*
+         Updating the homepage screen events list
+         Eg. When the user loads into this screen from the homepage screen, the list of events will be automatically filtered based on their chosen category preference
+         */
         
         updateSearchResults(for: self.searchController)
         
     }
-    
-    /*
-     When the segue to the 4th VC is performed (when the cell row is pressed):
-     - Get the index path of the cell
-     - Use the index path to get the Event struct from the filtered list
-     - Send the Event struct to the 4th VC so it can access the event details for the user's selected event
-     
-     Only executes if the indexPath has a value (meaning the user clicked the event from the homepage screen)
-     If the above is false (the user is just bypassing the homepage screen via the profile VC then this can be ignored)
-     */
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
-        let indexPath = self.eventTableView.indexPathForSelectedRow
-        
-        if segue.identifier == "segueFourthVC" && indexPath != nil {
-            
-            let eventDetailsVC = segue.destination as? ViewControllerFour
-            
-            eventDetailsVC!.retrievedEvent = Data.filteredList[indexPath!.row]
-        }
-    }
-
 }

@@ -15,8 +15,6 @@ class Data {
     static var username = ""
     static var userInterest = ""
     
-    
-    
     /*
      eventIndex stores the index of the event in the eventsList from the profile VCs (since has to go from profile VC --> via homepage --> event details screen and therefore the data can't be passed directly from profile VC --> event details screen using override prepare
      missingNavBar just determines whether we are reaching the homepage screen from the profile VC or not
@@ -24,7 +22,7 @@ class Data {
      */
     
     static var eventIndex = 0
-    static var missingNavBar = false
+    static var traversalOnly = false
     
     // Used to manually perform the segue to the homepage screen
     
@@ -137,6 +135,12 @@ class Data {
         } else {
             return actualDate
         }
+    }
+    
+    // A function which is able to find the index of the Event struct within the events list using the event name
+    
+    static func searchEventArray(eventName: String) -> Int? {
+        return Data.eventsList.firstIndex { $0.eventName == eventName}
     }
     
 }

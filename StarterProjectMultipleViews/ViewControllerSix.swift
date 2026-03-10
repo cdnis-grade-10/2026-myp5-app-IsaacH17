@@ -18,9 +18,7 @@ class ViewControllerSix: UIViewController, UITableViewDataSource, UITableViewDel
     @IBOutlet weak var eventsTableView: UITableView!
     
     @IBAction func homepageButton(_ sender: UIButton) {
-        self.dismiss(animated: true)
-        self.dismiss(animated: true)
-        self.present(Data.homepageVc, animated: true, completion: nil)
+        performSegue(withIdentifier: "sixthToHomeScreen", sender: self)
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -51,20 +49,15 @@ class ViewControllerSix: UIViewController, UITableViewDataSource, UITableViewDel
         
     }
     
-    func searchEventArray(eventName: String) -> Int? {
-        return Data.eventsList.firstIndex { $0.eventName == eventName}
-    }
-    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         let indexPath = self.eventsTableView.indexPathForSelectedRow?.row
         
         Data.eventIndex = searchEventArray(eventName: favoritedEvents[indexPath!].eventName)!
         
-        Data.missingNavBar = true
-//        self.view.window!.rootViewController?.dismiss(animated: false, completion: nil)
-
-        self.present(Data.homepageVc, animated: true, completion: nil)
+        Data.traversalOnly = true
+        
+        performSegue(withIdentifier: "sixthToHomeScreen", sender: self)
     }
         
     override func viewDidLoad() {

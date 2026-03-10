@@ -98,12 +98,11 @@ class ViewControllerThree: UIViewController, UIPickerViewDelegate, UIPickerViewD
                 isCorrectLatLong = false
             }
         }
-
         
         // Checking if there are any empty fields for certain required parameters + checking to see the latitude and longitude values are correct (using the variables set up above)
         
         if eventNameField.text != "" && ageRangeField.text != "" && categoryField.text != "" && dateField.text != "" && startTimeField.text != "" && endTimeField.text != "" && isCorrectLatLong == true {
-            
+
             
             // Converting the age and category option parameters from strings (the user input) into the enum form (since the Event struct only accepts the enum form)
             

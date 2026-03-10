@@ -84,9 +84,9 @@ class ViewControllerFour: UIViewController, MKMapViewDelegate {
          - Use the event index set from the profile VC (otherwise retrievedEvent will be determined through the homepage screen by clicking on one of the events)
          */
         
-        if Data.missingNavBar == true {
+        if Data.traversalOnly == true {
             retrievedEvent = Data.eventsList[Data.eventIndex]
-            Data.missingNavBar = false
+            Data.traversalOnly = false
         }
 
         // Do any additional setup after loading the view.

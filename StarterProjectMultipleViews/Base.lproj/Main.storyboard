@@ -89,7 +89,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AFK-Ib-dsY">
-                                <rect key="frame" x="139" y="814" width="124" height="42"/>
+                                <rect key="frame" x="135" y="808" width="133" height="42"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" systemColor="systemGreenColor"/>
                                 <state key="normal" title="Button"/>
@@ -99,14 +99,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Error: Please check again!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XcR-Zh-i7Q">
-                                <rect key="frame" x="21" y="779" width="352" height="27"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Your Selection:" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dQA-A3-ya2">
-                                <rect key="frame" x="21" y="744" width="352" height="27"/>
+                                <rect key="frame" x="25" y="773" width="352" height="27"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <nil key="textColor"/>
@@ -122,6 +115,13 @@
                                     <action selector="interestButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="l0g-Lb-V6i"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Your Selection:" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dQA-A3-ya2">
+                                <rect key="frame" x="25" y="738" width="352" height="27"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -134,7 +134,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="29.770992366412212" y="83.802816901408448"/>
+            <point key="canvasLocation" x="28.35820895522388" y="83.752860411899306"/>
         </scene>
         <!--View Controller Two-->
         <scene sceneID="Hz9-CX-Mfh">
@@ -468,6 +468,7 @@
         <!--View Controller Four-->
         <scene sceneID="HGO-xk-Tvr">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="d3H-Zu-sec" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <viewController storyboardIdentifier="eventDetailsScreen" modalPresentationStyle="fullScreen" id="Ivp-lf-pu2" customClass="ViewControllerFour" customModule="StarterProjectMultipleViews" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Cfg-fB-wIM">
                         <rect key="frame" x="0.0" y="0.0" width="402" height="874"/>
@@ -555,7 +556,6 @@
                         <outlet property="word3" destination="02U-sL-tIk" id="Up2-mB-2Rh"/>
                     </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="d3H-Zu-sec" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2595.5223880597014" y="83.752860411899306"/>
         </scene>
@@ -574,7 +574,7 @@
                                 <buttonConfiguration key="configuration" style="plain" title="Homepage"/>
                                 <connections>
                                     <action selector="homepageButton:" destination="iLA-K8-T5B" eventType="touchUpInside" id="HGo-CN-Flv"/>
-                                    <action selector="homepageButton:" destination="4iI-Tc-FHu" eventType="touchUpInside" id="VKK-YH-p8w"/>
+                                    <action selector="homepageButton:" destination="4iI-Tc-FHu" eventType="touchUpInside" id="tPu-Wa-kpf"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Username" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ahf-kH-AvV">
@@ -600,6 +600,7 @@
                     <navigationItem key="navigationItem" id="1Mw-V8-P49"/>
                     <connections>
                         <outlet property="usernameLabel" destination="ahf-kH-AvV" id="FPf-Mv-3Uv"/>
+                        <segue destination="YAZ-kA-HkH" kind="presentation" identifier="fifthToHomeScreen" id="BC9-dy-lwz"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lJq-Gc-P8M" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -621,7 +622,7 @@
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="Go to event calendar"/>
                                 <connections>
-                                    <segue destination="4iI-Tc-FHu" kind="show" id="bs5-Bk-bpF"/>
+                                    <segue destination="4iI-Tc-FHu" kind="presentation" id="zBm-Si-Oft"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="j15-iu-QzZ">
@@ -630,7 +631,7 @@
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="Homepage"/>
                                 <connections>
-                                    <action selector="homepageButton:" destination="3QD-oo-9oN" eventType="touchUpInside" id="jXO-Rh-Zmv"/>
+                                    <action selector="homepageButton:" destination="3QD-oo-9oN" eventType="touchUpInside" id="eeR-Gj-YHL"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Username" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pRw-YF-ueM">
@@ -710,6 +711,7 @@
                         <outlet property="eventNumber" destination="XLw-cJ-fpj" id="Rgm-HL-rRC"/>
                         <outlet property="eventsTableView" destination="8HV-Pp-IDX" id="AaK-k2-Eu1"/>
                         <outlet property="usernameLabel" destination="pRw-YF-ueM" id="xy5-rC-UGJ"/>
+                        <segue destination="YAZ-kA-HkH" kind="presentation" identifier="sixthToHomeScreen" id="jyp-GM-gdZ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kFP-eI-9h7" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -723,7 +725,7 @@
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="bcW-ce-HSu"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="Wj2-Ra-3RG">
-                        <rect key="frame" x="0.0" y="124" width="402" height="54"/>
+                        <rect key="frame" x="0.0" y="62" width="402" height="54"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -737,7 +739,8 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="bs5-Bk-bpF"/>
+        <segue reference="zBm-Si-Oft"/>
+        <segue reference="jyp-GM-gdZ"/>
     </inferredMetricsTieBreakers>
     <resources>
         <systemColor name="labelColor">
