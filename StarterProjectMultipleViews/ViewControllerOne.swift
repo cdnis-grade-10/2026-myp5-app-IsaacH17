@@ -34,7 +34,12 @@ class ViewControllerOne: UIViewController {
     @IBOutlet weak var userTextField: UITextField!
     @IBOutlet weak var errorMessage: UILabel!
     @IBOutlet weak var userSelection: UILabel!
+    @IBOutlet weak var educationButton: UIButton!
+    @IBOutlet weak var sportsButton: UIButton!
+    @IBOutlet weak var artsButton: UIButton!
+    @IBOutlet weak var othersButton: UIButton!
     
+    @IBOutlet weak var testbutton: UIButton!
     // MARK: - Variables and Constants
     
     var selectedInterest = false
@@ -102,9 +107,16 @@ class ViewControllerOne: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         
+        educationButton.imageView?.alpha = 0.3
+        sportsButton.imageView?.alpha = 0.3
+        artsButton.imageView?.alpha = 0.3
+        othersButton.imageView?.alpha = 0.3
+        
         // Hiding the error message by default
         
         errorMessage.isHidden = true
+        
+        testbutton.imageView?.alpha = 0.3
     }
 
 }

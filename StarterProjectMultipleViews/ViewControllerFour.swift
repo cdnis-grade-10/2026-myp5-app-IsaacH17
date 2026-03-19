@@ -117,6 +117,7 @@ class ViewControllerFour: UIViewController, MKMapViewDelegate {
         
         if retrievedEvent!.isFavorited == true {
             favoriteOutlet.title = "Favorited!"
+            favoriteOutlet.tintColor = .systemYellow
         }
         
     }

@@ -78,6 +78,10 @@ class ViewControllerSix: UIViewController, UITableViewDataSource, UITableViewDel
 
         // Do any additional setup after loading the view.
         
+        // Adding a black border to the table view
+        
+        eventsTableView.layer.borderWidth = 2
+        
         // Corner radius to the table view
         
         self.eventsTableView.layer.cornerRadius = 10

@@ -261,6 +261,36 @@ class ViewControllerThree: UIViewController, UIPickerViewDelegate, UIPickerViewD
 
         // Do any additional setup after loading the view.
         
+        // Adding a corner radius to all of the text fields (creating the mask then applying the corner radius)
+        
+        eventNameField.layer.masksToBounds = true
+        ageRangeField.layer.masksToBounds = true
+        categoryField.layer.masksToBounds = true
+        dateField.layer.masksToBounds = true
+        startTimeField.layer.masksToBounds = true
+        endTimeField.layer.masksToBounds = true
+        latField.layer.masksToBounds = true
+        longField.layer.masksToBounds = true
+        tag1Field.layer.masksToBounds = true
+        tag2Field.layer.masksToBounds = true
+        tag3Field.layer.masksToBounds = true
+        descField.layer.masksToBounds = true
+        
+        eventNameField.layer.cornerRadius = 8
+        ageRangeField.layer.cornerRadius = 8
+        categoryField.layer.cornerRadius = 8
+        dateField.layer.cornerRadius = 8
+        startTimeField.layer.cornerRadius = 8
+        endTimeField.layer.cornerRadius = 8
+        latField.layer.cornerRadius = 8
+        longField.layer.cornerRadius = 8
+        tag1Field.layer.cornerRadius = 5
+        tag2Field.layer.cornerRadius = 5
+        tag3Field.layer.cornerRadius = 5
+        descField.layer.cornerRadius = 8
+        
+        // Hiding the error message by default
+        
         errorMessage.isHidden = true
         
         // Age and category picker view setup

@@ -319,6 +319,10 @@ class ViewControllerTwo: UIViewController, UITableViewDataSource, UITableViewDel
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         
+        // Adding a black border to the table view
+        
+        eventTableView.layer.borderWidth = 2
+        
         // Corner radius to the table view
         
         self.eventTableView.layer.cornerRadius = 10
