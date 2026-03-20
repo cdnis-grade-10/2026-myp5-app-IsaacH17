@@ -34,13 +34,17 @@ class ViewControllerOne: UIViewController {
     @IBOutlet weak var userTextField: UITextField!
     @IBOutlet weak var errorMessage: UILabel!
     @IBOutlet weak var userSelection: UILabel!
-    @IBOutlet weak var educationButton: UIButton!
-    @IBOutlet weak var sportsButton: UIButton!
-    @IBOutlet weak var artsButton: UIButton!
-    @IBOutlet weak var othersButton: UIButton!
     
-    @IBOutlet weak var testbutton: UIButton!
+    // Outlets to select the image views (that act as the background image for each category) so that a corner radius can be applied later
+    
+    @IBOutlet weak var educationImage: UIImageView!
+    @IBOutlet weak var sportsImage: UIImageView!
+    @IBOutlet weak var artsImage: UIImageView!
+    @IBOutlet weak var othersImage: UIImageView!
+    
     // MARK: - Variables and Constants
+    
+    // Used to check if the user has selected a category or not
     
     var selectedInterest = false
     
@@ -58,7 +62,7 @@ class ViewControllerOne: UIViewController {
         
         /*
          If the user has selected a button:
-         - Use the button's tag to determine the category the user selected and assign it to the userInterest variable (this will be used later to automatically filter the homepage screen according to the category
+         - Get the tag of the selected button and use it to determine the category the user selected and assign it to the userInterest variable (this will be used later to automatically filter the homepage screen according to the category
          - Using a label to tell the user what button they selected (for confirmation) using enums
          */
         
@@ -91,7 +95,7 @@ class ViewControllerOne: UIViewController {
             // Assigning the username to a global variable & moving to the next screen
             
             Data.username = userTextField.text!
-    
+            
             self.present(Data.homepageVc, animated: true, completion: nil)
             
         } else {
@@ -100,24 +104,28 @@ class ViewControllerOne: UIViewController {
             
             errorMessage.isHidden = false
         }
-    
+        
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         
-        educationButton.imageView?.alpha = 0.3
-        sportsButton.imageView?.alpha = 0.3
-        artsButton.imageView?.alpha = 0.3
-        othersButton.imageView?.alpha = 0.3
+        // Corner radius for the background images for each category
+        
+        educationImage.layer.cornerRadius = 10
+        sportsImage.layer.cornerRadius = 10
+        artsImage.layer.cornerRadius = 10
+        othersImage.layer.cornerRadius = 10
+        
+        // Corner radius for the username field
+        
+        userTextField.layer.masksToBounds = true
+        userTextField.layer.cornerRadius = 10
         
         // Hiding the error message by default
         
         errorMessage.isHidden = true
         
-        testbutton.imageView?.alpha = 0.3
     }
-
 }
-
