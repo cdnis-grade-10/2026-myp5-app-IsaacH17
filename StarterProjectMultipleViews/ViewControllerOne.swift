@@ -55,14 +55,15 @@ class ViewControllerOne: UIViewController {
         // Checking if the user has selected a button
         
         if sender.tag != 0 {
+            
+            // User has selected a category
+            
             selectedInterest = true
         }
         
-        // Assigning the category as a text to a variable if the user has selected a button
-        
         /*
          If the user has selected a button:
-         - Get the tag of the selected button and use it to determine the category the user selected and assign it to the userInterest variable (this will be used later to automatically filter the homepage screen according to the category
+         - Get the tag of the selected button and use it to determine the category the user selected and assign it to the userInterest variable (this will be used later to automatically filter the homepage screen according to the category)
          - Using a label to tell the user what button they selected (for confirmation) using enums
          */
         
@@ -96,7 +97,9 @@ class ViewControllerOne: UIViewController {
             
             Data.username = userTextField.text!
             
-            self.present(Data.homepageVc, animated: true, completion: nil)
+            let homepageVc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "mainVCNav")
+            
+            self.present(homepageVc, animated: true, completion: nil)
             
         } else {
             

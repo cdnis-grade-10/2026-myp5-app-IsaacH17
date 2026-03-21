@@ -16,19 +16,17 @@ class Data {
     static var userInterest = ""
     
     /*
-     eventIndex stores the index of the event in the eventsList from the profile VCs (since has to go from profile VC --> via homepage --> event details screen and therefore the data can't be passed directly from profile VC --> event details screen using override prepare
-     missingNavBar just determines whether we are reaching the homepage screen from the profile VC or not
-     - If we are, then in the homepage VC it will directly direct the user to the event details page
+     User wants to learn more about a specific event --> finds the index for this event within the event array list and stores it as a variable
+     Used in homepage screen, profile screens where the user wants to learn more about a specific event
      */
     
     static var eventIndex = 0
+    
+    // Used to perform a segue from the profile screen to the event details screen via the homepage screen (not possible to segue without going through the homepage screen or else the 3rd and 4th VCs will lose their nav bars)
+    
     static var traversalOnly = false
     
-    // Used to manually perform the segue to the homepage screen
-    
-    static let homepageVc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "mainVCNav")
-    
-    // Enum for the category options on the signup page
+    // Enum for the category & age range options (used in the Event struct, signup page etc.)
     
     enum category {
         case education
@@ -45,8 +43,9 @@ class Data {
     }
     
     /*
-     Reformatting the enum inputs into actual strings
+     Function that reformats the enum inputs into actual strings
      Using the enum input as an argument and returning the string instead of assigning a variable to the string allows for flexibility (func. can be reused across different screens)
+     2 functions (one to reformat the category enum into a string and another to reformat the age range enum into a string)
      */
 
     static func categoryString(category: category) -> String {
@@ -102,10 +101,6 @@ class Data {
         Event(eventName: "Play Sports with Children", eventAgeRange: .age16to18, category: .sports, eventDate: DateComponents(year: 2026, month: 4, day: 10), eventStartTime: DateComponents(hour: 17, minute: 00), eventEndTime: DateComponents(hour: 19, minute: 00), latLocation: 22.28, longLocation: 114.18, descTag1: "Active", descTag2: "Refreshing", descTag3: "Awesome", eventDesc: "Come play sports with undepriviledged children!", eventImage: UIImage(named: "PlaySports")!)
     ]
     
-    // Creating a filtered list (will store the filtered events based on the search keywords and filter parameters set in the homepage screen)
-    
-    static var filteredList = Data.eventsList
-    
     // Creating a function to parse the DateComponents from the Events struct into an actual, readable string format
     // Users must give the 3 different DateComponents from the Events struct to be able to extract the actual date of the event + start & end time of the event
     
@@ -145,7 +140,7 @@ class Data {
     
 }
 
-// A class that stores all of the outlets which are present in each table view cell
+// A class that stores all of the outlets which are present in different table view cells across different screens
 
 class TableViewCell: UITableViewCell {
     

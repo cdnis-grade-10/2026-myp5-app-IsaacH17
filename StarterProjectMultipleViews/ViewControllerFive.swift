@@ -8,7 +8,6 @@
 import UIKit
 
 class ViewControllerFive: UIViewController, UICalendarSelectionSingleDateDelegate {
-    
 
     @IBOutlet weak var usernameLabel: UILabel!
     
@@ -38,9 +37,11 @@ class ViewControllerFive: UIViewController, UICalendarSelectionSingleDateDelegat
     /*
      If a date has been selected:
      Find the event index of the event within the eventsList array
-     Set traversalOnly to true and go to the homepage screen
-     - To go to the event details page (which is the goal since selecting the date it supposed to then show the actual event associated with the event), we must go through the homepage VC to reach the event details page or else the event creator & event details page will lose their nav bar
-     - By setting it to true, the homepage screen will understand that the user is trying to reach the event details page and thus direct them there immediately
+     The goal is to direct the user to the event details page for the event they selected
+     
+     To do so:
+     - We must go through the homepage screen to then reach the event details page 9otherwise the event creator & event details page will lose their nav bar)
+     - Thus we set traversalOnly to true --> when this is true, the homepage screen will read this and understand that the user is trying to directly go to the event details page and therefore transfer the user to that screen
      */
     
     func dateSelection(_ selection: UICalendarSelectionSingleDate, didSelectDate dateComponents: DateComponents?) {
@@ -102,7 +103,7 @@ class ViewControllerFive: UIViewController, UICalendarSelectionSingleDateDelegat
         let selection = UICalendarSelectionSingleDate(delegate: self)
         calendarView.selectionBehavior = selection
         
-        // Adding the calendar and giving it constraints
+        // Adding the calendar and giving it constraints so that it is placed properly (in between the events list / event calendar bar and the homepage button)
         
         view.addSubview(calendarView)
         
@@ -110,12 +111,13 @@ class ViewControllerFive: UIViewController, UICalendarSelectionSingleDateDelegat
             calendarView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
             calendarView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
             calendarView.heightAnchor.constraint(equalToConstant: 500),
-            calendarView.topAnchor.constraint(equalTo: view.topAnchor, constant: 285)
+            calendarView.topAnchor.constraint(equalTo: view.topAnchor, constant: 275)
         ])
         
         /*
          Logic to determine which dates will have the green dot (to signify the user's favorited event is held on that day)
          Checks all events in the events list --> if favorited, then the DateComponents of that date will be added to the dateArray
+         Later onwards the green dot will be applied to all dates in the dateArray array
          */
         
         for event in Data.eventsList where event.isFavorited == true {

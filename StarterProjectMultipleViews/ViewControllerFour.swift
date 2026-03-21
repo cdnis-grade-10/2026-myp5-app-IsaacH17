@@ -20,7 +20,7 @@ class ViewControllerFour: UIViewController, MKMapViewDelegate {
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var favoriteOutlet: UIBarButtonItem!
     
-    // Setting a variable which stores the retrieved event (essentially the user's chosen event)
+    // Setting a variable which stores the retrieved event (the user's chosen event they want details on)
     
     var retrievedEvent: Data.Event?
     
@@ -39,8 +39,8 @@ class ViewControllerFour: UIViewController, MKMapViewDelegate {
             
             // Changing the button text color
             
-            favoriteOutlet.tintColor = .systemYellow
             favoriteOutlet.tintColor = UIColor(red: 211/255, green: 175/255, blue: 76/255, alpha: 1)
+            
             // Use Data.eventIndex (which stores the index of the current event within the events list) and change the isFavorited parameter of the struct
             
             Data.eventsList[Data.eventIndex].isFavorited = true
@@ -72,10 +72,15 @@ class ViewControllerFour: UIViewController, MKMapViewDelegate {
 
         // Do any additional setup after loading the view.
         
+        // Applying a corner radius to the event iamge & MapKit view
+        
         imageView.layer.cornerRadius = 10
         mapView.layer.cornerRadius = 10
         
-        // This is only necessary for the homepage VC to know that it needs to redirect users to this page, must be switched off or else when the user backs out to the homepage screen, they will be sent back into this screen (resulting in a loop)
+        /*
+         This is only relevant for when the user is entering the event details screen from the one of the profile screens (as they would've had to go to this page via the homepage screen)
+         travesalOnly must be turned off (or else whenever the user enters the homepage screen they will be instantly directed to this page (infinite loop))
+         */
         
         Data.traversalOnly = false
         
@@ -117,7 +122,7 @@ class ViewControllerFour: UIViewController, MKMapViewDelegate {
         
         if retrievedEvent!.isFavorited == true {
             favoriteOutlet.title = "Favorited!"
-            favoriteOutlet.tintColor = .systemYellow
+            favoriteOutlet.tintColor = UIColor(red: 211/255, green: 175/255, blue: 76/255, alpha: 1)
         }
         
     }
