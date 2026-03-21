@@ -17,7 +17,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="402" height="874"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.5" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="MinimalisticWallpaper6" translatesAutoresizingMaskIntoConstraints="NO" id="LfS-jy-mZH">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.5" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="MinimalisticWallpaperVC1" translatesAutoresizingMaskIntoConstraints="NO" id="LfS-jy-mZH">
                                 <rect key="frame" x="0.0" y="0.0" width="402" height="874"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
@@ -185,7 +185,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="402" height="874"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.59999999999999998" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="MinimalisticWallpaper13" translatesAutoresizingMaskIntoConstraints="NO" id="eKP-uK-a4i">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.59999999999999998" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="MinimalisticWallpaperVC2" translatesAutoresizingMaskIntoConstraints="NO" id="eKP-uK-a4i">
                                 <rect key="frame" x="0.0" y="0.0" width="402" height="874"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
@@ -244,7 +244,7 @@
                                                     <rect key="frame" x="232" y="21" width="118" height="21"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
-                                                    <color key="textColor" red="0.82745098039215681" green="0.68627450980392157" blue="0.29803921568627451" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                    <color key="textColor" red="0.67082031250000007" green="0.55682431668254118" blue="0.23693273285087177" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
@@ -321,7 +321,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="402" height="874"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.5" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="MinimalisticWallpaper14" translatesAutoresizingMaskIntoConstraints="NO" id="Eqb-hr-lni">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.5" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="MinimalisticWallpaperVC3" translatesAutoresizingMaskIntoConstraints="NO" id="Eqb-hr-lni">
                                 <rect key="frame" x="0.0" y="0.0" width="402" height="874"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
@@ -529,7 +529,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="402" height="874"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.5" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="MinimalisticWallpaper12" translatesAutoresizingMaskIntoConstraints="NO" id="I83-Ip-Umk">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.5" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="MinimalisticWallpaperVC4" translatesAutoresizingMaskIntoConstraints="NO" id="I83-Ip-Umk">
                                 <rect key="frame" x="0.0" y="0.0" width="402" height="874"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
@@ -611,7 +611,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="402" height="874"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.5" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="MinimalisticWallpaper11" translatesAutoresizingMaskIntoConstraints="NO" id="UnQ-dZ-YOk">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.5" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="MinimalisticWallpaperVC5" translatesAutoresizingMaskIntoConstraints="NO" id="UnQ-dZ-YOk">
                                 <rect key="frame" x="0.0" y="0.0" width="402" height="874"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
@@ -686,7 +686,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="402" height="874"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.5" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="MinimalisticWallpaper2" translatesAutoresizingMaskIntoConstraints="NO" id="4Ob-ce-SoP">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.5" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="MinimalisticWallpaperVC6" translatesAutoresizingMaskIntoConstraints="NO" id="4Ob-ce-SoP">
                                 <rect key="frame" x="0.0" y="0.0" width="402" height="874"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
@@ -838,17 +838,17 @@
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="jyp-GM-gdZ"/>
-        <segue reference="W50-bJ-6qN"/>
+        <segue reference="1yg-Hf-QRe"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="ArtsFrontImage" width="960" height="541"/>
         <image name="EducationFrontImage" width="2560" height="1707"/>
-        <image name="MinimalisticWallpaper11" width="1284" height="2778"/>
-        <image name="MinimalisticWallpaper12" width="338" height="601"/>
-        <image name="MinimalisticWallpaper13" width="1151" height="2560"/>
-        <image name="MinimalisticWallpaper14" width="1170" height="2535"/>
-        <image name="MinimalisticWallpaper2" width="564" height="1002"/>
-        <image name="MinimalisticWallpaper6" width="800" height="1422"/>
+        <image name="MinimalisticWallpaperVC1" width="800" height="1422"/>
+        <image name="MinimalisticWallpaperVC2" width="1151" height="2560"/>
+        <image name="MinimalisticWallpaperVC3" width="1170" height="2535"/>
+        <image name="MinimalisticWallpaperVC4" width="338" height="601"/>
+        <image name="MinimalisticWallpaperVC5" width="1284" height="2778"/>
+        <image name="MinimalisticWallpaperVC6" width="564" height="1002"/>
         <image name="OthersFrontImage" width="800" height="533"/>
         <image name="SportsFrontImage" width="1014" height="392"/>
         <image name="Star" width="500" height="500"/>

@@ -39,7 +39,7 @@ class ViewControllerFour: UIViewController, MKMapViewDelegate {
             
             // Changing the button text color
             
-            favoriteOutlet.tintColor = UIColor(red: 211/255, green: 175/255, blue: 76/255, alpha: 1)
+            favoriteOutlet.tintColor = UIColor(red: 171/255, green: 142/255, blue: 60/255, alpha: 1)
             
             // Use Data.eventIndex (which stores the index of the current event within the events list) and change the isFavorited parameter of the struct
             
@@ -122,7 +122,7 @@ class ViewControllerFour: UIViewController, MKMapViewDelegate {
         
         if retrievedEvent!.isFavorited == true {
             favoriteOutlet.title = "Favorited!"
-            favoriteOutlet.tintColor = UIColor(red: 211/255, green: 175/255, blue: 76/255, alpha: 1)
+            favoriteOutlet.tintColor = UIColor(red: 171/255, green: 142/255, blue: 60/255, alpha: 1)
         }
         
     }

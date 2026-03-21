@@ -87,8 +87,12 @@ class ViewControllerTwo: UIViewController, UITableViewDataSource, UITableViewDel
         
         // If the event aligns with the user's chosen user interest, then there will be a recommended tag applied to the event
         
+//        tableViewCell.recommendLabel.layer.masksToBounds = true
+//        tableViewCell.recommendLabel.layer.cornerRadius = 10
+        
         if Data.categoryString(category: currentEvent.category) != Data.userInterest {
             tableViewCell.recommendLabel.isHidden = true
+
         } else {
             tableViewCell.recommendLabel.isHidden = false
         }
@@ -149,6 +153,8 @@ class ViewControllerTwo: UIViewController, UITableViewDataSource, UITableViewDel
     // Updating the actual results by getting the search bar keyword and filter selected, then displaying the new list of events using the fullFilter function
     
     func updateSearchResults(for searchController: UISearchController) {
+        
+        filteredList = filteredList.sorted(by: { Calendar.current.date(from: $0.eventDate)! < Calendar.current.date(from: $1.eventDate)!})
         
         // Retrieving the search keyword from the search bar and the selected filter button
         

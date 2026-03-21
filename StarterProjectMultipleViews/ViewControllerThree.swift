@@ -167,7 +167,7 @@ class ViewControllerThree: UIViewController, UIPickerViewDelegate, UIPickerViewD
              The default image will be a white background if the user doesn't provide an event image
              */
             
-            Data.eventsList.append(Data.Event(eventName: eventNameField.text!, eventAgeRange: ageOption, category: categoryOption, eventDate: DateComponents(year: year, month: month, day: day), eventStartTime: DateComponents(hour: startHour, minute: startMin), eventEndTime: DateComponents(hour: endHour, minute: endMin), latLocation: isLatDouble!, longLocation: isLongDouble!, descTag1: tag1Field.text!, descTag2: tag2Field.text!, descTag3: tag3Field.text!, eventDesc: descField.text!, eventImage: (imageField.image ?? UIImage(named: "White"))!))
+            Data.eventsList.append(Data.Event(eventName: eventNameField.text!, eventAgeRange: ageOption, category: categoryOption, eventDate: DateComponents(year: year, month: month, day: day), eventStartTime: DateComponents(hour: startHour, minute: startMin), eventEndTime: DateComponents(hour: endHour, minute: endMin), latLocation: isLatDouble!, longLocation: isLongDouble!, descTag1: tag1Field.text!, descTag2: tag2Field.text!, descTag3: tag3Field.text!, eventDesc: descField.text!, eventImage: imageField.image!))
             
             // Moving back to the homepage screen
 
