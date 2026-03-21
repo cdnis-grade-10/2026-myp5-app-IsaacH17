@@ -59,7 +59,7 @@ class ViewControllerThree: UIViewController, UIPickerViewDelegate, UIPickerViewD
     let ageOptions = ["13+", "16+", "13-16", "16-18"]
     let categoryOptions = ["Education", "Sports", "Arts", "Others"]
     
-    // Date picker setup
+    // Date picker setup (creating the date pickers)
     
     let datePicker = UIDatePicker()
     let startTimePicker = UIDatePicker()
@@ -67,7 +67,7 @@ class ViewControllerThree: UIViewController, UIPickerViewDelegate, UIPickerViewD
     
     // MARK: - IBActions and Functions
     
-    // Choosing an image and presenting this screen when the 'select image' button has been pressed
+    // Allows the user to choose an image and presents the image selection screen when the 'select image' button has been pressed
     
     @IBAction func imagePickerButton(_ sender: UIButton) {
         
@@ -99,11 +99,12 @@ class ViewControllerThree: UIViewController, UIPickerViewDelegate, UIPickerViewD
             }
         }
         
-        // Checking if there are any empty fields for certain required parameters + checking to see the latitude and longitude values are correct (using the variables set up above)
+        // isCorrectLatLong will essentially indicate whether the user has entered the lat. and long. values, whether they are Doubles, and whether they are of the desired range
         
-        if eventNameField.text != "" && ageRangeField.text != "" && categoryField.text != "" && dateField.text != "" && startTimeField.text != "" && endTimeField.text != "" && isCorrectLatLong == true {
+        // Checking if there are any empty fields, if there are, the user must fix the errors and input information for all the fields before they can proceed to create the actual event
+        
+        if eventNameField.text != "" && ageRangeField.text != "" && categoryField.text != "" && dateField.text != "" && startTimeField.text != "" && endTimeField.text != "" && isCorrectLatLong == true && tag1Field.text != "" && tag2Field.text != "" && tag3Field.text != "" && descField.text != "" && imageField.image != nil {
 
-            
             // Converting the age and category option parameters from strings (the user input) into the enum form (since the Event struct only accepts the enum form)
             
             var ageOption: Data.ageRange
@@ -181,7 +182,7 @@ class ViewControllerThree: UIViewController, UIPickerViewDelegate, UIPickerViewD
         }
     }
     
-    // Controls the image - when the chosen image has been selected and confirmed, it will be attached to the image view
+    // Controls the image -> when the chosen image has been selected and confirmed, it will be attached to the image view
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         guard let image = info[.editedImage] as? UIImage else {
@@ -193,13 +194,16 @@ class ViewControllerThree: UIViewController, UIPickerViewDelegate, UIPickerViewD
         dismiss(animated: true)
     }
     
-    // Only 1 row in the picker view
+    // Showing that the picker view only has 1 column
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
     }
     
-    // # of rows of the picker view will be determined by whether it is the age or category picker view
+    /*
+     # of rows the picker view will have
+     As we have 2 picker views, it will need to see which picker view is being selected then the # of rows is determined by whether it is the age / category picker view
+     */
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         if pickerView == agePickerView {
@@ -231,7 +235,7 @@ class ViewControllerThree: UIViewController, UIPickerViewDelegate, UIPickerViewD
     
     /*
      Function is run when the date picker info. changes
-     Transforming the dates into string format (specifically the format as shown in dateFormatter and timeFormatter)
+     Transforming the dates into string format (specifically the format as shown in dateFormatter and timeFormatter) and then displaying it as the text field text
      */
     
     @objc func datePickerValueChanged(sender: UIDatePicker) {
@@ -241,7 +245,7 @@ class ViewControllerThree: UIViewController, UIPickerViewDelegate, UIPickerViewD
         dateFormatter.dateFormat = "dd/MM/yyyy"
         timeFormatter.dateFormat = "HH:mm"
         
-        // Showing the correct information based on the picker view (date / start time / end time)
+        // Showing the correct information based on the picker view (date / start time / end time text field)
         
         switch sender {
         case datePicker:
@@ -276,18 +280,19 @@ class ViewControllerThree: UIViewController, UIPickerViewDelegate, UIPickerViewD
         tag3Field.layer.masksToBounds = true
         descField.layer.masksToBounds = true
         
-        eventNameField.layer.cornerRadius = 8
-        ageRangeField.layer.cornerRadius = 8
-        categoryField.layer.cornerRadius = 8
-        dateField.layer.cornerRadius = 8
-        startTimeField.layer.cornerRadius = 8
-        endTimeField.layer.cornerRadius = 8
-        latField.layer.cornerRadius = 8
-        longField.layer.cornerRadius = 8
-        tag1Field.layer.cornerRadius = 5
-        tag2Field.layer.cornerRadius = 5
-        tag3Field.layer.cornerRadius = 5
-        descField.layer.cornerRadius = 8
+        eventNameField.layer.cornerRadius = 10
+        ageRangeField.layer.cornerRadius = 10
+        categoryField.layer.cornerRadius = 10
+        dateField.layer.cornerRadius = 10
+        startTimeField.layer.cornerRadius = 10
+        endTimeField.layer.cornerRadius = 10
+        latField.layer.cornerRadius = 10
+        longField.layer.cornerRadius = 10
+        tag1Field.layer.cornerRadius = 10
+        tag2Field.layer.cornerRadius = 10
+        tag3Field.layer.cornerRadius = 10
+        descField.layer.cornerRadius = 10
+        imageField.layer.cornerRadius = 10
         
         // Hiding the error message by default
         

@@ -16,9 +16,7 @@ class ViewControllerFour: UIViewController, MKMapViewDelegate {
     @IBOutlet weak var organizerDateTimeLabel: UILabel!
     @IBOutlet weak var ageCatLabel: UILabel!
     @IBOutlet weak var descLabel: UILabel!
-    @IBOutlet weak var word1: UILabel!
-    @IBOutlet weak var word2: UILabel!
-    @IBOutlet weak var word3: UILabel!
+    @IBOutlet weak var descTagLabels: UILabel!
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var favoriteOutlet: UIBarButtonItem!
     
@@ -42,7 +40,7 @@ class ViewControllerFour: UIViewController, MKMapViewDelegate {
             // Changing the button text color
             
             favoriteOutlet.tintColor = .systemYellow
-            
+            favoriteOutlet.tintColor = UIColor(red: 211/255, green: 175/255, blue: 76/255, alpha: 1)
             // Use Data.eventIndex (which stores the index of the current event within the events list) and change the isFavorited parameter of the struct
             
             Data.eventsList[Data.eventIndex].isFavorited = true
@@ -73,6 +71,9 @@ class ViewControllerFour: UIViewController, MKMapViewDelegate {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        
+        imageView.layer.cornerRadius = 10
+        mapView.layer.cornerRadius = 10
         
         // This is only necessary for the homepage VC to know that it needs to redirect users to this page, must be switched off or else when the user backs out to the homepage screen, they will be sent back into this screen (resulting in a loop)
         
@@ -109,9 +110,8 @@ class ViewControllerFour: UIViewController, MKMapViewDelegate {
         ageCatLabel.text = "Age: \(Data.ageRangeString(ageRange: retrievedEvent!.eventAgeRange)) | Category: \(Data.categoryString(category: retrievedEvent!.category))"
         
         descLabel.text = retrievedEvent?.eventDesc
-        word1.text = retrievedEvent?.descTag1
-        word2.text = retrievedEvent?.descTag2
-        word3.text = retrievedEvent?.descTag3
+        
+        descTagLabels.text = retrievedEvent!.descTag1 + ", " + retrievedEvent!.descTag2 + ", " + retrievedEvent!.descTag3
         
         // Showing that the event has already been favorited if this is true by checking the isFavorited parameter of the struct
         
