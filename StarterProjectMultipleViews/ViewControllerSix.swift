@@ -98,6 +98,10 @@ class ViewControllerSix: UIViewController, UITableViewDataSource, UITableViewDel
             }
         }
         
+        // Filtering the favorited events list so that it is organized by date
+        
+        favoritedEvents = favoritedEvents.sorted(by: { Calendar.current.date(from: $0.eventDate)! < Calendar.current.date(from: $1.eventDate)!})
+        
         // Count the total # of favorited events then display it as a congratulatory message to congratulate the user on this achievement
         
         eventNo = favoritedEvents.count

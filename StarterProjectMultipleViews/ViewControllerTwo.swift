@@ -154,8 +154,6 @@ class ViewControllerTwo: UIViewController, UITableViewDataSource, UITableViewDel
     
     func updateSearchResults(for searchController: UISearchController) {
         
-        filteredList = filteredList.sorted(by: { Calendar.current.date(from: $0.eventDate)! < Calendar.current.date(from: $1.eventDate)!})
-        
         // Retrieving the search keyword from the search bar and the selected filter button
         
         let searchBar = searchController.searchBar
@@ -199,7 +197,11 @@ class ViewControllerTwo: UIViewController, UITableViewDataSource, UITableViewDel
     
     func fullFilter(searchText: String, scopeButton: String) {
         
-        // Creating the filtered list by filtering the full events list
+        // Sorting the main events list (which contains all of the events) by sorting through the dates (organizing the dates from closest to the current date to the furthest away from the current date)
+        
+        Data.eventsList = Data.eventsList.sorted(by: { Calendar.current.date(from: $0.eventDate)! < Calendar.current.date(from: $1.eventDate)!})
+        
+        // Adding events to the filtered list of events by sorting through the main events list
         
         filteredList = Data.eventsList.filter {
             
