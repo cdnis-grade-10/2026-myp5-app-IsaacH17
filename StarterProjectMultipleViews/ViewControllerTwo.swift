@@ -205,21 +205,21 @@ class ViewControllerTwo: UIViewController, UITableViewDataSource, UITableViewDel
         
         filteredList = Data.eventsList.filter {
             
-            // For each event in the list:
+            /*
+             For each event in the list:
+             Use the filter selection & search keyword to find matches, events will be added to filteredList if the event matches with the search keyword and filter applied
+             
+             Event will be added to the list if:
+             - The selected filter category matches the actual event category OR
+             - If the event name contains the category itself
+             - If the filter (age range) matches the age range of the event
+             */
             
             event in
             
             /*
-             Check if the event matches the filter by seeing if:
-             - The selected filter category matches the actual event category OR
-             - If the event name contains the category itself
-             - If the filter (age range) matches the age range of the event
-             Returns true or false
-             
              When a filter is selected, the label will tell the user what filter they have chosen (especially because the emojis used in the different filters may make it difficult to understand (for the user) as to what they actually represent)
-             */
-            
-            /*
+             
              First checking to see if the filter button selected is of an age range instead of a category
              - If 13+ is selected, then see if the event's age is either 13+ or 13-16, return true if so
              - If 16+ is selected, then see if the event's age is either 16+ or 16-18, return true if so
@@ -274,7 +274,8 @@ class ViewControllerTwo: UIViewController, UITableViewDataSource, UITableViewDel
                 break
             }
             
-            // Seeing if any of the 3 criteria have been met (not possible for all to be true, eg. a filter can only be categorical or age range based thus correctFilterCategory and ageRangeTrue can't both be true)
+            // Seeing if any of the 3 criteria have been met (for the event to be appended to the filtered list)
+            // Not possible for all criteria to return true (eg. a filter can only be categorical or age range based thus correctFilterCategory and ageRangeTrue can't both be true)
             
             let scopeMatch = (correctFilterCategory == true || ageRangeTrue == true || event.eventName.lowercased().contains(scopeButton.lowercased()))
             
