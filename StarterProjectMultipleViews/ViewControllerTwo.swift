@@ -87,9 +87,6 @@ class ViewControllerTwo: UIViewController, UITableViewDataSource, UITableViewDel
         
         // If the event aligns with the user's chosen user interest, then there will be a recommended tag applied to the event
         
-//        tableViewCell.recommendLabel.layer.masksToBounds = true
-//        tableViewCell.recommendLabel.layer.cornerRadius = 10
-        
         if Data.categoryString(category: currentEvent.category) != Data.userInterest {
             tableViewCell.recommendLabel.isHidden = true
 
