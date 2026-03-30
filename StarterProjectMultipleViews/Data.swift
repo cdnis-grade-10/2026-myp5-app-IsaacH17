@@ -147,11 +147,7 @@ class Data {
     }
     
 <<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
 =======
-=======
->>>>>>> event-creator
     // Creating an array of the Events struct (all of the app's events will be stored in here)
     
     static var eventsList = [
