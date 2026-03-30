@@ -126,7 +126,7 @@ class ViewControllerOne: UIViewController {
             
             Data.username = userTextField.text!
             performSegue(withIdentifier: "segueToSecondVC", sender: self)
-=======
+//=======
             // Assigning the username to a global variable & moving to the next screen
             
             Data.username = userTextField.text!
