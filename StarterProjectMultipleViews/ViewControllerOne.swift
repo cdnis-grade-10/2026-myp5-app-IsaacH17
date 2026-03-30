@@ -35,6 +35,7 @@ class ViewControllerOne: UIViewController {
     @IBOutlet weak var errorMessage: UILabel!
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
     @IBOutlet weak var userSelection: UILabel!
 >>>>>>> homepage-screen
@@ -52,6 +53,22 @@ class ViewControllerOne: UIViewController {
 >>>>>>> homepage-screen
 =======
 >>>>>>> event-creator
+=======
+    @IBOutlet weak var userSelection: UILabel!
+    
+    // Outlets to select the image views (that act as the background image for each category) so that a corner radius can be applied later
+    
+    @IBOutlet weak var educationImage: UIImageView!
+    @IBOutlet weak var sportsImage: UIImageView!
+    @IBOutlet weak var artsImage: UIImageView!
+    @IBOutlet weak var othersImage: UIImageView!
+    
+    // MARK: - Variables and Constants
+    
+    // Used to check if the user has selected a category or not
+    
+    var selectedInterest = false
+>>>>>>> final-improvements
     
     // MARK: - IBActions and Functions
     
@@ -60,6 +77,7 @@ class ViewControllerOne: UIViewController {
         // Checking if the user has selected a button
         
         if sender.tag != 0 {
+<<<<<<< HEAD
             selectedInterest = true
         }
         
@@ -84,6 +102,17 @@ class ViewControllerOne: UIViewController {
         /*
          If the user has selected a button:
          - Use the button's tag to determine the category the user selected and assign it to the userInterest variable (this will be used later to automatically filter the homepage screen according to the category
+=======
+            
+            // User has selected a category
+            
+            selectedInterest = true
+        }
+        
+        /*
+         If the user has selected a button:
+         - Get the tag of the selected button and use it to determine the category the user selected and assign it to the userInterest variable (this will be used later to automatically filter the homepage screen according to the category)
+>>>>>>> final-improvements
          - Using a label to tell the user what button they selected (for confirmation) using enums
          */
         
@@ -106,9 +135,12 @@ class ViewControllerOne: UIViewController {
             
         }
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> homepage-screen
 =======
 >>>>>>> event-creator
+=======
+>>>>>>> final-improvements
     }
     
     @IBAction func submitButton(_ sender: UIButton) {
@@ -117,6 +149,7 @@ class ViewControllerOne: UIViewController {
         
         if userTextField.text != "" && selectedInterest == true {
             
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
             // Assigning the username to a variable & moving to the next screen
@@ -135,23 +168,56 @@ class ViewControllerOne: UIViewController {
             self.present(vc, animated: true, completion: nil)
             
 >>>>>>> event-creator
+=======
+            // Assigning the username to a global variable & moving to the next screen
+            
+            Data.username = userTextField.text!
+            
+            let homepageVc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "mainVCNav")
+            
+            self.present(homepageVc, animated: true, completion: nil)
+            
+>>>>>>> final-improvements
         } else {
             
             // Showing the error message if inputs haven't been fully completed
             
             errorMessage.isHidden = false
         }
+<<<<<<< HEAD
     
+=======
+        
+>>>>>>> final-improvements
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         
+<<<<<<< HEAD
         // Hiding the error message by default
         
         errorMessage.isHidden = true
     }
 
+=======
+        // Corner radius for the background images for each category
+        
+        educationImage.layer.cornerRadius = 10
+        sportsImage.layer.cornerRadius = 10
+        artsImage.layer.cornerRadius = 10
+        othersImage.layer.cornerRadius = 10
+        
+        // Corner radius for the username field
+        
+        userTextField.layer.masksToBounds = true
+        userTextField.layer.cornerRadius = 10
+        
+        // Hiding the error message by default
+        
+        errorMessage.isHidden = true
+        
+    }
+>>>>>>> final-improvements
 }
-

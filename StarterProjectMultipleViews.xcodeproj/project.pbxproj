@@ -16,6 +16,12 @@
 		120E28AB27DAFE95000129B5 /* ViewControllerTwo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 120E28AA27DAFE95000129B5 /* ViewControllerTwo.swift */; };
 		121E32872817B5A200DC59D4 /* ViewControllerThree.swift in Sources */ = {isa = PBXBuildFile; fileRef = 121E32862817B5A200DC59D4 /* ViewControllerThree.swift */; };
 		6A8979BD2F57E5EC00A7C3C8 /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A8979BC2F57E5EC00A7C3C8 /* Data.swift */; };
+<<<<<<< HEAD
+=======
+		6AB087402F5E9EA900F33E53 /* ViewControllerSix.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AB0873F2F5E9EA900F33E53 /* ViewControllerSix.swift */; };
+		6AF6418F2F5C6B370091C50D /* ViewControllerFour.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AF6418E2F5C6B370091C50D /* ViewControllerFour.swift */; };
+		6AF641912F5D38480091C50D /* ViewControllerFive.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AF641902F5D38480091C50D /* ViewControllerFive.swift */; };
+>>>>>>> final-improvements
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +36,12 @@
 		120E28AA27DAFE95000129B5 /* ViewControllerTwo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerTwo.swift; sourceTree = "<group>"; };
 		121E32862817B5A200DC59D4 /* ViewControllerThree.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerThree.swift; sourceTree = "<group>"; };
 		6A8979BC2F57E5EC00A7C3C8 /* Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
+<<<<<<< HEAD
+=======
+		6AB0873F2F5E9EA900F33E53 /* ViewControllerSix.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerSix.swift; sourceTree = "<group>"; };
+		6AF6418E2F5C6B370091C50D /* ViewControllerFour.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerFour.swift; sourceTree = "<group>"; };
+		6AF641902F5D38480091C50D /* ViewControllerFive.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerFive.swift; sourceTree = "<group>"; };
+>>>>>>> final-improvements
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -67,6 +79,9 @@
 				120E289A27DAFAF4000129B5 /* ViewControllerOne.swift */,
 				120E28AA27DAFE95000129B5 /* ViewControllerTwo.swift */,
 				121E32862817B5A200DC59D4 /* ViewControllerThree.swift */,
+				6AF6418E2F5C6B370091C50D /* ViewControllerFour.swift */,
+				6AF641902F5D38480091C50D /* ViewControllerFive.swift */,
+				6AB0873F2F5E9EA900F33E53 /* ViewControllerSix.swift */,
 				120E289C27DAFAF4000129B5 /* Main.storyboard */,
 				6A8979BC2F57E5EC00A7C3C8 /* Data.swift */,
 				120E289F27DAFAF6000129B5 /* Assets.xcassets */,
@@ -148,10 +163,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				120E28AB27DAFE95000129B5 /* ViewControllerTwo.swift in Sources */,
+<<<<<<< HEAD
+=======
+				6AB087402F5E9EA900F33E53 /* ViewControllerSix.swift in Sources */,
+>>>>>>> final-improvements
 				6A8979BD2F57E5EC00A7C3C8 /* Data.swift in Sources */,
 				120E289B27DAFAF4000129B5 /* ViewControllerOne.swift in Sources */,
 				121E32872817B5A200DC59D4 /* ViewControllerThree.swift in Sources */,
+				6AF641912F5D38480091C50D /* ViewControllerFive.swift in Sources */,
 				120E289727DAFAF4000129B5 /* AppDelegate.swift in Sources */,
+				6AF6418F2F5C6B370091C50D /* ViewControllerFour.swift in Sources */,
 				120E289927DAFAF4000129B5 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

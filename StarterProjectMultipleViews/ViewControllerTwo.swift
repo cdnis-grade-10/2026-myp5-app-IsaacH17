@@ -35,18 +35,41 @@ class ViewControllerTwo: UIViewController, UITableViewDataSource, UITableViewDel
     @IBOutlet weak var chosenFilter: UILabel!
     @IBOutlet weak var eventTableView: UITableView!
     
+<<<<<<< HEAD
     // MARK: - Variables and Constants
     
+    // Setting up the search controller
+=======
+    @IBOutlet weak var usernameLabel: UILabel!
+    @IBOutlet weak var chosenFilter: UILabel!
+    @IBOutlet weak var eventTableView: UITableView!
+>>>>>>> final-improvements
+    
+    let searchController = UISearchController()
+    
+<<<<<<< HEAD
+    // Creating another events list (will be used to retrieve the new list of events after the user has applied filters)
+    
+=======
     // Setting up the search controller
     
     let searchController = UISearchController()
     
-    // Creating another events list (will be used to retrieve the new list of events after the user has applied filters)
+    /*
+     Determines whether the user has just entered this screen from another screen
+     If so, then the events list needs to be refiltered based on the user's category preference selection in the signup screen (or else there will be no filters applied at all)
+     */
     
+    var firstTimeLoad = false
+    
+    // Stores the filtered list (which is the same as the events list but will be filtered based on the search keyword and filter parameters)
+    
+>>>>>>> final-improvements
     var filteredList = Data.eventsList
     
     // MARK: - IBActions and Functions
     
+<<<<<<< HEAD
     /*
      # of rows in the table will = filtered list / events list count (depending if the search controller is being used (whether the user is currently applying filters or not))
      */
@@ -55,6 +78,12 @@ class ViewControllerTwo: UIViewController, UITableViewDataSource, UITableViewDel
         
         // Returning the filtered list of events --> updateSearchResults is called once this screen is loaded in so the filteredList will show the new list based on the filter (the user's selected user interest)
         
+=======
+    // # of rows in the table will equal the filtered list count (since the list of events we are showing in the event table view is always coming from the filtered list of events
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
+>>>>>>> final-improvements
         return filteredList.count
         
     }
@@ -84,10 +113,19 @@ class ViewControllerTwo: UIViewController, UITableViewDataSource, UITableViewDel
         
         // If the event aligns with the user's chosen user interest, then there will be a recommended tag applied to the event
         
+<<<<<<< HEAD
         print(Data.categoryString(category: currentEvent.category), Data.userInterest)
         
         if Data.categoryString(category: currentEvent.category) != Data.userInterest {
             tableViewCell.recommendLabel.isHidden = true
+=======
+//        tableViewCell.recommendLabel.layer.masksToBounds = true
+//        tableViewCell.recommendLabel.layer.cornerRadius = 10
+        
+        if Data.categoryString(category: currentEvent.category) != Data.userInterest {
+            tableViewCell.recommendLabel.isHidden = true
+
+>>>>>>> final-improvements
         } else {
             tableViewCell.recommendLabel.isHidden = false
         }
@@ -96,6 +134,28 @@ class ViewControllerTwo: UIViewController, UITableViewDataSource, UITableViewDel
         
     }
     
+<<<<<<< HEAD
+=======
+    // When the user clicks on the event row (wants to learn more about the event):
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        // Get the index of the row, which can be used to find the Event struct by using the index within the filtered list (as all of the events that are presented in the table view format are a part of filtered list (since the list has been filtered through)
+        
+        let indexPath = self.eventTableView.indexPathForSelectedRow
+        let eventChosen = filteredList[indexPath!.row]
+        
+        /*
+         Find the same Event struct within the main event array (as this never changes unlike the filtered event array) and get its index and store it
+         This index will be used later to access the desired Event struct through the events list array
+         */
+        
+        Data.eventIndex = Data.searchEventArray(eventName: eventChosen.eventName)!
+        
+        self.performSegue(withIdentifier: "segueFourthVC", sender: self)
+    }
+    
+>>>>>>> final-improvements
     // Function to initialize search controller
     
     func initSearchController() {
@@ -117,8 +177,11 @@ class ViewControllerTwo: UIViewController, UITableViewDataSource, UITableViewDel
         
         if #available(iOS 26.0, *) {
             navigationItem.searchBarPlacementAllowsToolbarIntegration = false
+<<<<<<< HEAD
         } else {
             // Fallback on earlier versions
+=======
+>>>>>>> final-improvements
         }
         
         
@@ -139,11 +202,18 @@ class ViewControllerTwo: UIViewController, UITableViewDataSource, UITableViewDel
         var filterButton = searchBar.scopeButtonTitles![searchBar.selectedScopeButtonIndex]
         
         /*
+<<<<<<< HEAD
          If the search controller is inactive (essentially when no filters have been applied at all which usually happens when the homepage screen is first loaded in):
          The filter will be the user's selected interest (so that the events list is filtered based on the user's interest preference)
          */
         
         if searchController.isActive == false {
+=======
+         If firstTimeLoad = true (when there are no prior search filters since the user just came to this screen from another VC), then the filter applide will be the user's selected interest chosen in the signup screen
+         */
+        
+        if firstTimeLoad == true {
+>>>>>>> final-improvements
             
             switch Data.userInterest {
             case "Education":
@@ -160,12 +230,23 @@ class ViewControllerTwo: UIViewController, UITableViewDataSource, UITableViewDel
             
         }
         
+<<<<<<< HEAD
         // Filtering the events list
+=======
+        firstTimeLoad = false
+        
+        /*
+         Filtering the events list
+         If the user has already selected a search text keyword and/or filter button, then this will be what is used to filter the events list array
+         If no filters are used, then only filterButton will be inputted (which is the user's category preference as determined above)
+         */
+>>>>>>> final-improvements
         
         fullFilter(searchText: searchText, scopeButton: filterButton)
         
     }
     
+<<<<<<< HEAD
     // Function that determines how the events list is filtered, scope button is set to the user's interest category selected from the signup screen by default
     
     func fullFilter(searchText: String, scopeButton: String) {
@@ -190,6 +271,36 @@ class ViewControllerTwo: UIViewController, UITableViewDataSource, UITableViewDel
             
             /*
              Looking at the age filters (by default, it is determined that the age range filter doesn't match the event's age range unless proven)
+=======
+    // Function that filters the events list using the search keyword and/or filter chosen
+    
+    func fullFilter(searchText: String, scopeButton: String) {
+        
+        // Sorting the main events list (which contains all of the events) by sorting through the dates (organizing the dates from closest to the current date to the furthest away from the current date)
+        
+        Data.eventsList = Data.eventsList.sorted(by: { Calendar.current.date(from: $0.eventDate)! < Calendar.current.date(from: $1.eventDate)!})
+        
+        // Adding events to the filtered list of events by sorting through the main events list
+        
+        filteredList = Data.eventsList.filter {
+            
+            /*
+             For each event in the list:
+             Use the filter selection & search keyword to find matches, events will be added to filteredList if the event matches with the search keyword and filter applied
+             
+             Event will be added to the list if:
+             - The selected filter category matches the actual event category OR
+             - If the event name contains the category itself
+             - If the filter (age range) matches the age range of the event
+             */
+            
+            event in
+            
+            /*
+             When a filter is selected, the label will tell the user what filter they have chosen (especially because the emojis used in the different filters may make it difficult to understand (for the user) as to what they actually represent)
+             
+             First checking to see if the filter button selected is of an age range instead of a category
+>>>>>>> final-improvements
              - If 13+ is selected, then see if the event's age is either 13+ or 13-16, return true if so
              - If 16+ is selected, then see if the event's age is either 16+ or 16-18, return true if so
              */
@@ -210,11 +321,19 @@ class ViewControllerTwo: UIViewController, UITableViewDataSource, UITableViewDel
             
             /*
              Looking at the category filters
+<<<<<<< HEAD
              - Checking if the selected filters match the event's category - if so then filter category = event category criteria is met
              */
             
             var correctFilterCategory = false
                         
+=======
+             - Checking if the selected filter matches the event's category using the criteria mentioned above - if so, then filter category = event category criteria is met
+             */
+            
+            var correctFilterCategory = false
+            
+>>>>>>> final-improvements
             switch scopeButton {
             case "All":
                 correctFilterCategory = true
@@ -236,10 +355,14 @@ class ViewControllerTwo: UIViewController, UITableViewDataSource, UITableViewDel
                 }
             case "Misc":
 <<<<<<< HEAD
+<<<<<<< HEAD
                 chosenFilter.text = "Filter Selection: Misc"
 =======
                 chosenFilter.text = "Filter Selection: Others/Misc"
 >>>>>>> event-creator
+=======
+                chosenFilter.text = "Filter Selection: Others/Misc"
+>>>>>>> final-improvements
                 if Data.categoryString(category: event.category) == "Others" {
                     correctFilterCategory = true
                 }
@@ -247,7 +370,12 @@ class ViewControllerTwo: UIViewController, UITableViewDataSource, UITableViewDel
                 break
             }
             
+<<<<<<< HEAD
             // Seeing if any of the 3 criteria have been met
+=======
+            // Seeing if any of the 3 criteria have been met (for the event to be appended to the filtered list)
+            // Not possible for all criteria to return true (eg. a filter can only be categorical or age range based thus correctFilterCategory and ageRangeTrue can't both be true)
+>>>>>>> final-improvements
             
             let scopeMatch = (correctFilterCategory == true || ageRangeTrue == true || event.eventName.lowercased().contains(scopeButton.lowercased()))
             
@@ -277,10 +405,33 @@ class ViewControllerTwo: UIViewController, UITableViewDataSource, UITableViewDel
         
     }
     
+<<<<<<< HEAD
+=======
+    /*
+     If the user is traversing via the homepage screen to reach the event details page, then directly direct them to the event details VC using the segue
+     */
+    
+    override func viewDidAppear(_ animated: Bool) {
+        if Data.traversalOnly == true {
+            self.performSegue(withIdentifier: "segueFourthVC", sender: self)
+        }
+        
+        /*
+         If the user is entering this screen from another screen that isn't the signup screen (eg. event creator screen), because the viewDidLoad is already triggered, we can only determine if the user came from another screen using viewDidAppear
+         If the user is coming from another screen, then we need to reload the events list using their category preference
+         */
+        
+        firstTimeLoad = true
+        updateSearchResults(for: self.searchController)
+    }
+    
+>>>>>>> final-improvements
     override func viewDidLoad() {
+        
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         
+<<<<<<< HEAD
         // Welcoming the user using their name & displaying the search controller
         
         usernameLabel.text = "Name: " + Data.username
@@ -292,4 +443,26 @@ class ViewControllerTwo: UIViewController, UITableViewDataSource, UITableViewDel
         
     }
 
+=======
+        // Adding a black border to the table view
+        
+        eventTableView.layer.borderWidth = 2
+        
+        // Corner radius to the table view
+        
+        self.eventTableView.layer.cornerRadius = 10
+        
+        // Welcoming the user using their name & displaying the search controller
+        
+        usernameLabel.text = "Hello, " + Data.username
+        
+        initSearchController()
+        
+        // Updating the events list according to the user's selected preference in the singup screen
+
+        firstTimeLoad = true
+        updateSearchResults(for: self.searchController)
+        
+    }
+>>>>>>> final-improvements
 }

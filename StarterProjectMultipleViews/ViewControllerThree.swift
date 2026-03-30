@@ -59,7 +59,11 @@ class ViewControllerThree: UIViewController, UIPickerViewDelegate, UIPickerViewD
     let ageOptions = ["13+", "16+", "13-16", "16-18"]
     let categoryOptions = ["Education", "Sports", "Arts", "Others"]
     
+<<<<<<< HEAD
     // Date picker setup
+=======
+    // Date picker setup (creating the date pickers)
+>>>>>>> final-improvements
     
     let datePicker = UIDatePicker()
     let startTimePicker = UIDatePicker()
@@ -67,7 +71,11 @@ class ViewControllerThree: UIViewController, UIPickerViewDelegate, UIPickerViewD
     
     // MARK: - IBActions and Functions
     
+<<<<<<< HEAD
     // Choosing an image and presenting this screen when the 'select image' button has been pressed
+=======
+    // Allows the user to choose an image and presents the image selection screen when the 'select image' button has been pressed
+>>>>>>> final-improvements
     
     @IBAction func imagePickerButton(_ sender: UIButton) {
         
@@ -89,6 +97,7 @@ class ViewControllerThree: UIViewController, UIPickerViewDelegate, UIPickerViewD
         
         let isLatDouble = Double(latField.text!)
         let isLongDouble = Double(longField.text!)
+<<<<<<< HEAD
         let isCorrectLatLong: Bool
         
         if isLatDouble! > 90 || isLatDouble! < -90 || isLongDouble! > 180 || isLongDouble! < -80 {
@@ -102,6 +111,24 @@ class ViewControllerThree: UIViewController, UIPickerViewDelegate, UIPickerViewD
         if eventNameField.text != "" && ageRangeField.text != "" && categoryField.text != "" && dateField.text != "" && startTimeField.text != "" && endTimeField.text != "" && isLatDouble != nil && isLongDouble != nil && isCorrectLatLong == true {
             
             
+=======
+        var isCorrectLatLong: Bool = false
+        
+        if isLatDouble != nil && isLongDouble != nil {
+            if isLatDouble! <= 90 && isLatDouble! >= -90 && isLongDouble! <= 180 && isLongDouble! >= -180 {
+                isCorrectLatLong = true
+            } else {
+                isCorrectLatLong = false
+            }
+        }
+        
+        // isCorrectLatLong will essentially indicate whether the user has entered the lat. and long. values, whether they are Doubles, and whether they are of the desired range
+        
+        // Checking if there are any empty fields, if there are, the user must fix the errors and input information for all the fields before they can proceed to create the actual event
+        
+        if eventNameField.text != "" && ageRangeField.text != "" && categoryField.text != "" && dateField.text != "" && startTimeField.text != "" && endTimeField.text != "" && isCorrectLatLong == true && tag1Field.text != "" && tag2Field.text != "" && tag3Field.text != "" && descField.text != "" && imageField.image != nil {
+
+>>>>>>> final-improvements
             // Converting the age and category option parameters from strings (the user input) into the enum form (since the Event struct only accepts the enum form)
             
             var ageOption: Data.ageRange
@@ -164,12 +191,21 @@ class ViewControllerThree: UIViewController, UIPickerViewDelegate, UIPickerViewD
              The default image will be a white background if the user doesn't provide an event image
              */
             
+<<<<<<< HEAD
             Data.eventsList.append(Data.Event(eventName: eventNameField.text!, eventAgeRange: ageOption, category: categoryOption, eventDate: DateComponents(year: year, month: month, day: day), eventStartTime: DateComponents(hour: startHour, minute: startMin), eventEndTime: DateComponents(hour: endHour, minute: endMin), latLocation: isLatDouble!, longLocation: isLongDouble!, descTag1: tag1Field.text!, descTag2: tag2Field.text!, descTag3: tag3Field.text!, eventDesc: descField.text!, eventImage: (imageField.image ?? UIImage(named: "White"))!))
             
             // Moving back to the homepage screen
             
             let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "mainVCNav")
             self.present(vc, animated: true, completion: nil)
+=======
+            Data.eventsList.append(Data.Event(eventName: eventNameField.text!, eventAgeRange: ageOption, category: categoryOption, eventDate: DateComponents(year: year, month: month, day: day), eventStartTime: DateComponents(hour: startHour, minute: startMin), eventEndTime: DateComponents(hour: endHour, minute: endMin), latLocation: isLatDouble!, longLocation: isLongDouble!, descTag1: tag1Field.text!, descTag2: tag2Field.text!, descTag3: tag3Field.text!, eventDesc: descField.text!, eventImage: imageField.image!))
+            
+            // Moving back to the homepage screen
+
+            self.navigationController?.popToRootViewController(animated: true)
+
+>>>>>>> final-improvements
             
         } else {
             
@@ -179,7 +215,11 @@ class ViewControllerThree: UIViewController, UIPickerViewDelegate, UIPickerViewD
         }
     }
     
+<<<<<<< HEAD
     // Controls the image - when the chosen image has been selected and confirmed, it will be attached to the image view
+=======
+    // Controls the image -> when the chosen image has been selected and confirmed, it will be attached to the image view
+>>>>>>> final-improvements
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         guard let image = info[.editedImage] as? UIImage else {
@@ -191,13 +231,24 @@ class ViewControllerThree: UIViewController, UIPickerViewDelegate, UIPickerViewD
         dismiss(animated: true)
     }
     
+<<<<<<< HEAD
     // Only 1 row in the picker view
+=======
+    // Showing that the picker view only has 1 column
+>>>>>>> final-improvements
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
     }
     
+<<<<<<< HEAD
     // # of rows of the picker view will be determined by whether it is the age or category picker view
+=======
+    /*
+     # of rows the picker view will have
+     As we have 2 picker views, it will need to see which picker view is being selected then the # of rows is determined by whether it is the age / category picker view
+     */
+>>>>>>> final-improvements
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         if pickerView == agePickerView {
@@ -229,7 +280,11 @@ class ViewControllerThree: UIViewController, UIPickerViewDelegate, UIPickerViewD
     
     /*
      Function is run when the date picker info. changes
+<<<<<<< HEAD
      Transforming the dates into string format (specifically the format as shown in dateFormatter and timeFormatter)
+=======
+     Transforming the dates into string format (specifically the format as shown in dateFormatter and timeFormatter) and then displaying it as the text field text
+>>>>>>> final-improvements
      */
     
     @objc func datePickerValueChanged(sender: UIDatePicker) {
@@ -239,7 +294,11 @@ class ViewControllerThree: UIViewController, UIPickerViewDelegate, UIPickerViewD
         dateFormatter.dateFormat = "dd/MM/yyyy"
         timeFormatter.dateFormat = "HH:mm"
         
+<<<<<<< HEAD
         // Showing the correct information based on the picker view (date / start time / end time)
+=======
+        // Showing the correct information based on the picker view (date / start time / end time text field)
+>>>>>>> final-improvements
         
         switch sender {
         case datePicker:
@@ -259,6 +318,40 @@ class ViewControllerThree: UIViewController, UIPickerViewDelegate, UIPickerViewD
 
         // Do any additional setup after loading the view.
         
+<<<<<<< HEAD
+=======
+        // Adding a corner radius to all of the text fields (creating the mask then applying the corner radius)
+        
+        eventNameField.layer.masksToBounds = true
+        ageRangeField.layer.masksToBounds = true
+        categoryField.layer.masksToBounds = true
+        dateField.layer.masksToBounds = true
+        startTimeField.layer.masksToBounds = true
+        endTimeField.layer.masksToBounds = true
+        latField.layer.masksToBounds = true
+        longField.layer.masksToBounds = true
+        tag1Field.layer.masksToBounds = true
+        tag2Field.layer.masksToBounds = true
+        tag3Field.layer.masksToBounds = true
+        descField.layer.masksToBounds = true
+        
+        eventNameField.layer.cornerRadius = 10
+        ageRangeField.layer.cornerRadius = 10
+        categoryField.layer.cornerRadius = 10
+        dateField.layer.cornerRadius = 10
+        startTimeField.layer.cornerRadius = 10
+        endTimeField.layer.cornerRadius = 10
+        latField.layer.cornerRadius = 10
+        longField.layer.cornerRadius = 10
+        tag1Field.layer.cornerRadius = 10
+        tag2Field.layer.cornerRadius = 10
+        tag3Field.layer.cornerRadius = 10
+        descField.layer.cornerRadius = 10
+        imageField.layer.cornerRadius = 10
+        
+        // Hiding the error message by default
+        
+>>>>>>> final-improvements
         errorMessage.isHidden = true
         
         // Age and category picker view setup
